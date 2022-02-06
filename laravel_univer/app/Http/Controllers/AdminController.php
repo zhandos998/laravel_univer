@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use App\Models\Role;
 
-class HomeController extends Controller
+class AdminController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -15,7 +18,7 @@ class HomeController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        Auth::user()->hasRole('admin');
+        // Auth::user()->hasRole('admin');
     }
 
     /**
@@ -26,5 +29,43 @@ class HomeController extends Controller
     public function index()
     {
         return view('admin.home');
+    }
+    public function view_users()
+    {
+        $users1 = DB::table('users')
+        ->leftJoin('users_roles', 'users.id', '=', 'users_roles.user_id')
+        ->leftJoin('roles', 'roles.id', '=', 'users_roles.role_id')
+        ->select('users.id','users.name','users.email','roles.name as role');
+        $users = $users1->get();
+        print($users1->toSql());
+        return view('admin.users',['users'=>$users]);
+    }
+    public function view_user($id)
+    {
+        $user = DB::table('users')
+        ->where('users.id',$id)
+        ->leftJoin('users_roles', 'users.id', '=', 'users_roles.user_id')
+        ->leftJoin('roles', 'roles.id', '=', 'users_roles.role_id')
+        ->select('users.id','users.name','users.email','roles.name as role')
+        ->first();
+        // dd($user);
+        return view('admin.user',['user'=>$user]);
+    }
+
+    public function add_user(Request $request)
+    {
+        if ($request->isMethod('post')){
+            $user = new User();
+            $user->name = $request->name;
+            $user->email = $request->email;
+            $user->password = bcrypt($request->password);
+            $user->save();
+            if($request->role==1)
+                $user->roles()->attach(Role::where('slug','teacher')->first());
+            if($request->role==2)
+                $user->roles()->attach(Role::where('slug','admin')->first());
+            return redirect("admin/users");
+        }
+        return view('admin.add_user');
     }
 }

@@ -16,6 +16,11 @@
 
                     {{ __('Admin!') }}
 
+                    <button type="button" class="btn btn-outline-dark"><a href="/admin/users">Users</a></button>
+                    <button type="button" class="btn btn-outline-dark"><a href="subjects">Subjects</a></button>
+                    <button type="button" class="btn btn-outline-dark"><a href="groups">Group</a></button>
+                    <button type="button" class="btn btn-outline-dark"><a href="news">News</a></button>
+
                 </div>
             </div>
         </div>

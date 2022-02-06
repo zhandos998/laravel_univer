@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Models\User;
 
 class HomeController extends Controller
 {
@@ -25,12 +24,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $user = User::find(2);
-        dd(Auth::user()->hasRole('admin')); //вернёт true
-        // dd(Auth::user());
-        if (Auth::user()->hasRole('Admin'))
+        if (Auth::user()->hasRole('admin'))
         {
-            return redirect('\admin');
+            return redirect('admin');
         }
         return view('home');
     }

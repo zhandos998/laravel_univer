@@ -37,7 +37,6 @@ class AdminController extends Controller
         ->leftJoin('roles', 'roles.id', '=', 'users_roles.role_id')
         ->select('users.id','users.name','users.email','roles.name as role');
         $users = $users1->get();
-        print($users1->toSql());
         return view('admin.users',['users'=>$users]);
     }
     public function view_user($id)
@@ -67,5 +66,37 @@ class AdminController extends Controller
             return redirect("admin/users");
         }
         return view('admin.add_user');
+    }
+
+    public function change_user(Request $request,$id)
+    {
+        if ($request->isMethod('post')){
+            DB::table('users')
+            ->where('users.id',$id)
+            ->update(array('name' => $request->name,'email' => $request->email,'password' => bcrypt($request->password)));
+
+            $user_role = DB::table('users_roles')
+            ->where('user_id',$id);
+
+            if($request->role==1)
+                $user_role->update(array('role_id' => 1));
+            if($request->role==2)
+                $user_role->update(array('role_id' => 2));
+            return redirect("/admin/users");
+        }
+        $user = DB::table('users')
+        ->where('users.id',$id)
+        ->leftJoin('users_roles', 'users.id', '=', 'users_roles.user_id')
+        ->select('users.id','users.name','users.email','users_roles.role_id as role')
+        ->first();
+        return view('admin.change_user',['user'=>$user]);
+    }
+
+    public function delete_user($id)
+    {
+        $user = DB::table('users')
+        ->where('users.id',$id)
+        ->delete();
+        return redirect("/admin/users");
     }
 }

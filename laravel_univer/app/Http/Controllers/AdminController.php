@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Models\Role;
+use App\Models\Subjects;
 
 class AdminController extends Controller
 {
@@ -18,7 +19,7 @@ class AdminController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        // Auth::user()->hasRole('admin');
+        $this->middleware('role:admin');
     }
 
     /**
@@ -98,5 +99,44 @@ class AdminController extends Controller
         ->where('users.id',$id)
         ->delete();
         return redirect("/admin/users");
+    }
+
+
+    public function view_subjects()
+    {
+        $subjects = DB::table('subjects')
+        ->get();
+        return view('admin.subjects',['subjects'=>$subjects]);
+    }
+
+    public function add_subject(Request $request)
+    {
+        if ($request->isMethod('post')){
+            $subjects = new Subjects();
+            $subjects->name = $request->name;
+            $subjects->save();
+            return redirect('/admin/subjects');
+        }
+        return view('admin.add_subject');
+    }
+
+    public function change_subject(Request $request,$id)
+    {
+        if ($request->isMethod('post')){
+            DB::table('subjects')
+            ->where('id',$id)
+            ->update(array('name' => $request->name));
+            return redirect("/admin/subjects");
+        }
+        $subject = DB::table('subjects')
+        ->first();
+        return view('admin.change_subject',['subject'=>$subject]);
+    }
+    public function delete_subject($id)
+    {
+        DB::table('subjects')
+        ->where('id',$id)
+        ->delete();
+        return redirect("/admin/subjects");
     }
 }

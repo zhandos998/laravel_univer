@@ -28,6 +28,10 @@ class HomeController extends Controller
         {
             return redirect('admin');
         }
+        if (Auth::user()->hasRole('teacher'))
+        {
+            return redirect('teacher');
+        }
         return view('home');
     }
 }

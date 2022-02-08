@@ -12,7 +12,6 @@
                     {{$group->name}}<br>
                     <button type="button" class="btn btn-outline-dark"><a href="/admin/change_group/{{$group->id}}">Change Group</a></button><br>
                     <button type="button" class="btn btn-outline-dark"><a href="/admin/delete_group/{{$group->id}}">Delete Group</a></button><br>
-                    <button type="button" class="btn btn-outline-dark"><a href="/admin/delete_user/{{$user->id}}">Delete User</a></button>
                 </div>
             </div>
         </div>

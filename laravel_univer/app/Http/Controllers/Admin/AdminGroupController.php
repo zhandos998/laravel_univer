@@ -28,10 +28,13 @@ class AdminGroupController extends Controller
         ->get();
         return view('admin.groups.groups',['groups'=>$groups]);
     }
+
     public function view_group($id)
     {
         $group = DB::table('groups')
-        ->where('groups.id',$id)
+        ->join('users', 'users.id', '=', 'groups.id_supervisor')
+        ->select("groups.*",'users.name')
+        ->where("groups.id",$id)
         ->first();
 
         return view('admin.groups.group',['group'=>$group]);

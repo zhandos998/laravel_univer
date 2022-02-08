@@ -1,15 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Models\Role;
-use App\Models\Subjects;
 
-class AdminController extends Controller
+class AdminUserController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -22,15 +21,6 @@ class AdminController extends Controller
         $this->middleware('role:admin');
     }
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
-    public function index()
-    {
-        return view('admin.home');
-    }
     public function view_users()
     {
         $users1 = DB::table('users')
@@ -38,7 +28,7 @@ class AdminController extends Controller
         ->leftJoin('roles', 'roles.id', '=', 'users_roles.role_id')
         ->select('users.id','users.name','users.email','roles.name as role');
         $users = $users1->get();
-        return view('admin.users',['users'=>$users]);
+        return view('admin.users.users',['users'=>$users]);
     }
     public function view_user($id)
     {
@@ -49,7 +39,7 @@ class AdminController extends Controller
         ->select('users.id','users.name','users.email','roles.name as role')
         ->first();
         // dd($user);
-        return view('admin.user',['user'=>$user]);
+        return view('admin.users.user',['user'=>$user]);
     }
 
     public function add_user(Request $request)
@@ -66,7 +56,7 @@ class AdminController extends Controller
                 $user->roles()->attach(Role::where('slug','admin')->first());
             return redirect("admin/users");
         }
-        return view('admin.add_user');
+        return view('admin.users.add_user');
     }
 
     public function change_user(Request $request,$id)
@@ -90,7 +80,7 @@ class AdminController extends Controller
         ->leftJoin('users_roles', 'users.id', '=', 'users_roles.user_id')
         ->select('users.id','users.name','users.email','users_roles.role_id as role')
         ->first();
-        return view('admin.change_user',['user'=>$user]);
+        return view('admin.subjects.change_user',['user'=>$user]);
     }
 
     public function delete_user($id)
@@ -99,44 +89,5 @@ class AdminController extends Controller
         ->where('users.id',$id)
         ->delete();
         return redirect("/admin/users");
-    }
-
-
-    public function view_subjects()
-    {
-        $subjects = DB::table('subjects')
-        ->get();
-        return view('admin.subjects',['subjects'=>$subjects]);
-    }
-
-    public function add_subject(Request $request)
-    {
-        if ($request->isMethod('post')){
-            $subjects = new Subjects();
-            $subjects->name = $request->name;
-            $subjects->save();
-            return redirect('/admin/subjects');
-        }
-        return view('admin.add_subject');
-    }
-
-    public function change_subject(Request $request,$id)
-    {
-        if ($request->isMethod('post')){
-            DB::table('subjects')
-            ->where('id',$id)
-            ->update(array('name' => $request->name));
-            return redirect("/admin/subjects");
-        }
-        $subject = DB::table('subjects')
-        ->first();
-        return view('admin.change_subject',['subject'=>$subject]);
-    }
-    public function delete_subject($id)
-    {
-        DB::table('subjects')
-        ->where('id',$id)
-        ->delete();
-        return redirect("/admin/subjects");
     }
 }

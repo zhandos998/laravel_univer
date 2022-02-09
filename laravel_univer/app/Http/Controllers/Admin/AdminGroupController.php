@@ -91,23 +91,23 @@ class AdminGroupController extends Controller
         return redirect("/admin/groups");
     }
 
-    // public function add_students(Request $request)
-    // {
-    //     if ($request->isMethod('post')){
-    //         $group = new Groups();
-    //         $group->class = $request->class;
-    //         $group->letter = $request->letter;
-    //         $group->id_supervisor = $request->teacher_id;
-    //         $group->save();
+    public function add_students(Request $request,$id)
+    {
+        if ($request->isMethod('post')){
+            $group = new Groups();
+            $group->class = $request->class;
+            $group->letter = $request->letter;
+            $group->id_supervisor = $request->teacher_id;
+            $group->save();
 
-    //         return redirect("admin/groups");
-    //     }
-    //     $teachers = DB::table("users")
-    //     ->join('users_roles', 'users.id', '=', 'users_roles.user_id')
-    //     ->join('roles', 'roles.id', '=', 'users_roles.role_id')
-    //     ->select("users.id",'users.name')
-    //     ->where("roles.slug","teacher")
-    //     ->get();
-    //     return view('admin.groups.add_group',["teachers"=>$teachers]);
-    // }
+            return redirect("admin/groups");
+        }
+        $students = DB::table("users")
+        ->join('users_roles', 'users.id', '=', 'users_roles.user_id')
+        ->join('roles', 'roles.id', '=', 'users_roles.role_id')
+        ->select("users.id",'users.name')
+        ->where("roles.slug","student")
+        ->get();
+        return view('admin.groups.add_students',["students"=>$students,"id"=>$id]);
+    }
 }

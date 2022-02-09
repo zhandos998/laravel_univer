@@ -18,6 +18,7 @@ class UserSeeder extends Seeder
     {
         $admin = Role::where('slug','admin')->first();
         $teacher = Role::where('slug', 'teacher')->first();
+        $student = Role::where('slug', 'student')->first();
         $user1 = new User();
         $user1->name = 'Jhon Deo';
         $user1->email = 'jhon@deo.com';
@@ -35,5 +36,6 @@ class UserSeeder extends Seeder
         $user3->email = 'jo@jo.com';
         $user3->password = bcrypt('123456');
         $user3->save();
+        $user3->roles()->attach($student);
     }
 }

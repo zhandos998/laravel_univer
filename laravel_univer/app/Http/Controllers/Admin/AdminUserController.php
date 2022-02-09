@@ -54,6 +54,8 @@ class AdminUserController extends Controller
                 $user->roles()->attach(Role::where('slug','teacher')->first());
             if($request->role==2)
                 $user->roles()->attach(Role::where('slug','admin')->first());
+            else
+                $user->roles()->attach(Role::where('slug','student')->first());
             return redirect("admin/users");
         }
         return view('admin.users.add_user');
@@ -73,6 +75,8 @@ class AdminUserController extends Controller
                 $user_role->update(array('role_id' => 1));
             if($request->role==2)
                 $user_role->update(array('role_id' => 2));
+            else
+                $user_role->update(array('role_id' => 3));
             return redirect("/admin/users");
         }
         $user = DB::table('users')

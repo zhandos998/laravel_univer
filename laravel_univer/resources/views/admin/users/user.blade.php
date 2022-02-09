@@ -13,6 +13,7 @@
                     {{$user->role}}<br>
                     <button type="button" class="btn btn-outline-dark"><a href="/admin/change_user/{{$user->id}}">Change</a></button>
                     <button type="button" class="btn btn-outline-dark"><a href="/admin/delete_user/{{$user->id}}">Delete User</a></button>
+                    <button type="button" class="btn btn-outline-dark"><a href="/admin/add_to_group/{{$user->id}}">Add to group</a></button>
                 </div>
             </div>
         </div>

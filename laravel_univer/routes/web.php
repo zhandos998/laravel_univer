@@ -16,6 +16,9 @@ Route::post('/admin/add_user', [App\Http\Controllers\Admin\AdminUserController::
 Route::get('/admin/change_user/{id}', [App\Http\Controllers\Admin\AdminUserController::class, 'change_user'])->name('change_user');
 Route::post('/admin/change_user/{id}', [App\Http\Controllers\Admin\AdminUserController::class, 'change_user'])->name('change_user');
 Route::get('/admin/delete_user/{id}', [App\Http\Controllers\Admin\AdminUserController::class, 'delete_user'])->name('delete_user');
+Route::get('/admin/add_to_group/{id}', [App\Http\Controllers\Admin\AdminUserController::class, 'add_to_group'])->name('add_to_group');
+Route::post('/admin/add_to_group/{id}', [App\Http\Controllers\Admin\AdminUserController::class, 'add_to_group'])->name('add_to_group');
+
 
 Route::get('/admin/subjects', [App\Http\Controllers\Admin\AdminSubjectController::class, 'view_subjects'])->name('view_subjects');
 Route::get('/admin/add_subject', [App\Http\Controllers\Admin\AdminSubjectController::class, 'add_subject'])->name('add_subject');
@@ -26,8 +29,8 @@ Route::get('/admin/delete_subject/{id}', [App\Http\Controllers\Admin\AdminSubjec
 
 Route::get('/admin/groups', [App\Http\Controllers\Admin\AdminGroupController::class, 'view_groups'])->name('view_groups');
 Route::get('/admin/group/{id}', [App\Http\Controllers\Admin\AdminGroupController::class, 'view_group'])->name('view_group');
-Route::get('/admin/add_students/{id}', [App\Http\Controllers\Admin\AdminGroupController::class, 'add_students'])->name('view_group');
-Route::post('/admin/add_students/{id}', [App\Http\Controllers\Admin\AdminGroupController::class, 'add_students'])->name('view_group');
+// Route::get('/admin/add_students/{id}', [App\Http\Controllers\Admin\AdminGroupController::class, 'add_students'])->name('view_group');
+// Route::post('/admin/add_students/{id}', [App\Http\Controllers\Admin\AdminGroupController::class, 'add_students'])->name('view_group');
 Route::get('/admin/add_group', [App\Http\Controllers\Admin\AdminGroupController::class, 'add_group'])->name('add_group');
 Route::post('/admin/add_group', [App\Http\Controllers\Admin\AdminGroupController::class, 'add_group'])->name('add_group');
 Route::get('/admin/change_group/{id}', [App\Http\Controllers\Admin\AdminGroupController::class, 'change_group'])->name('change_group');

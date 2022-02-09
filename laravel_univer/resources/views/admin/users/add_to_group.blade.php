@@ -1,4 +1,4 @@
-{{-- @extends('layouts.app')
+@extends('layouts.app')
 
 @section('content')
 <div class="container">
@@ -7,24 +7,14 @@
             <div class="card">
                 <div class="card-header">{{ Auth::user()->roles[0]->name }}</div>
                 <div class="card-body">
-                <form method="POST" action="/admin/add_students/{{$id}}">
+                <form method="POST" action="/admin/add_to_group/{{$id}}">
                     @csrf
+                    <div class="form-group autocomplete">
+                        <label for="group">Group</label>
+                        <input id="teacher_name" class="form-control" autocomplete="off">
+                        <input id="teacher_id" name="group_id" style="display: none">
+                    </div>
 
-                    <div class="form-group autocomplete">
-                        <label>Куда</label>
-                        <input class="input_name form-control" autocomplete="off">
-                        <input class="input_id" name="teacher_id" style="display: none">
-                    </div>
-                    <div class="form-group autocomplete">
-                        <label>Куда</label>
-                        <input class="input_name form-control" autocomplete="off">
-                        <input class="input_id" name="teacher_id" style="display: none">
-                    </div>
-                    <div class="form-group autocomplete">
-                        <label>Куда</label>
-                        <input class="input_name form-control" autocomplete="off">
-                        <input class="input_id" name="teacher_id" style="display: none">
-                    </div>
                     <button type="submit" class="btn btn-primary">Create</button>
                 </form>
                 </div>
@@ -81,12 +71,12 @@
     </style>
     <script>
         var countries = [
-            @foreach ($students as $student)
-                {'id':{{$student->id}},'country':"{{$student->name}}"},
+            @foreach ($groups as $group)
+                {'id':{{$group->id}},'country':"{{$group->class.' '.$group->letter.' '.$group->name}}"},
             @endforeach
         ];
 
-        function autocomplete(inp, arr,inp_iter) {
+        function autocomplete(inp, arr) {
             var currentFocus;
             inp.addEventListener("input", function(e) {
                 var a, b, i, val = this.value,col = 0,f=false;
@@ -106,7 +96,7 @@
                         b.innerHTML += arr[i]["country"].substr(val.length);
                         b.innerHTML += "<input type='hidden' value='" + arr[i]["country"] + "'>";
                         b.addEventListener("click", function(e) {
-                            addFinded(this.getElementsByTagName("input")[0].value,inp_iter);
+                            addFinded(this.getElementsByTagName("input")[0].value);
                             // inp.value = "";
                             closeAllLists();
                         });
@@ -136,7 +126,7 @@
                     if (currentFocus > -1) {
                     if (x)
                     {
-                        addFinded(x[currentFocus].innerText,inp_iter);
+                        addFinded(x[currentFocus].innerText);
                         x[currentFocus].click();
                     }
                     }
@@ -167,7 +157,7 @@
             });
         }
         finded=[];
-        function addFinded(country,inp_iter) {
+        function addFinded(country) {
             var b=true;
             for(var i=0;i<finded.length;i++)
             {
@@ -183,16 +173,10 @@
                 {
                     if (countries[i]["country"]==country)
                     {
-                        var tn = document.getElementsByClassName("input_name")[inp_iter];
+                        var tn = document.getElementById("teacher_name");
                         tn.value = country;
-                        var ti = document.getElementsByClassName("input_id")[inp_iter];
+                        var ti = document.getElementById("teacher_id");
                         ti.value = countries[i]["id"];
-                        // var str = "<div id = \"finded-" + countries[i]["id"]+
-                        // "\" class = \" mr-1 my-2\"><input style=\"display:none\" name=\"countries[]\" value=\""+countries[i]["id"]+"\"><span class=\"mr-1\">" + country +
-                        // "</span><span style=\"cursor: pointer\" onclick=\"deleteFinded('"+countries[i]["id"]+
-                        // "')\">❌</span></div>";
-                        // d.innerHTML+=str;
-                        // finded.push(countries[i]);
                         break;
                     }
                 }
@@ -211,11 +195,7 @@
             elem.parentNode.removeChild(elem);
             console.log(this.innerHTML);
         }
-        var els = document.getElementsByClassName("input_name");
-
-        Array.prototype.forEach.call(els, function(el,i) {
-            autocomplete(el, countries,i);
-        });
+        autocomplete(document.getElementById("teacher_name"), countries);
     </script>
 </div>
-@endsection --}}
+@endsection

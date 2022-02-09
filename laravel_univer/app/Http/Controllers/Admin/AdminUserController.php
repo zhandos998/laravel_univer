@@ -84,7 +84,7 @@ class AdminUserController extends Controller
         ->leftJoin('users_roles', 'users.id', '=', 'users_roles.user_id')
         ->select('users.id','users.name','users.email','users_roles.role_id as role')
         ->first();
-        return view('admin.subjects.change_user',['user'=>$user]);
+        return view('admin.users.change_user',['user'=>$user]);
     }
 
     public function delete_user($id)
@@ -93,5 +93,22 @@ class AdminUserController extends Controller
         ->where('users.id',$id)
         ->delete();
         return redirect("/admin/users");
+    }
+
+    public function add_to_group(Request $request,$id)
+    {
+        if ($request->isMethod('post')){
+            DB::table('users_groups')
+            ->insert([
+                'user_id' => $id,
+                'group_id' => $request->group_id
+            ]);
+            return redirect("/admin/users");
+        }
+        $groups = DB::table('groups')
+        ->join('users', 'users.id', '=', 'groups.id_supervisor')
+        ->select('groups.id', 'groups.class', 'groups.letter', 'users.name')
+        ->get();
+        return view('admin.users.add_to_group',['groups'=>$groups,'id'=>$id]);
     }
 }

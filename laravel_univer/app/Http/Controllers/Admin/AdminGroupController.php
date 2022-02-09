@@ -36,8 +36,13 @@ class AdminGroupController extends Controller
         ->select("groups.*",'users.name')
         ->where("groups.id",$id)
         ->first();
-
-        return view('admin.groups.group',['group'=>$group]);
+        $students = DB::table('users')
+        ->join('users_groups', 'users.id', '=', 'users_groups.user_id')
+        ->join('groups', 'groups.id', '=', 'users_groups.group_id')
+        ->select('users.id','users.name','users.email')
+        ->where("groups.id",$id)
+        ->get();
+        return view('admin.groups.group',['group'=>$group,"students"=>$students]);
     }
 
     public function add_group(Request $request)

@@ -16,8 +16,8 @@ Route::post('/admin/add_user', [App\Http\Controllers\Admin\AdminUserController::
 Route::get('/admin/change_user/{id}', [App\Http\Controllers\Admin\AdminUserController::class, 'change_user'])->name('change_user');
 Route::post('/admin/change_user/{id}', [App\Http\Controllers\Admin\AdminUserController::class, 'change_user'])->name('change_user');
 Route::get('/admin/delete_user/{id}', [App\Http\Controllers\Admin\AdminUserController::class, 'delete_user'])->name('delete_user');
-Route::get('/admin/add_to_group/{id}', [App\Http\Controllers\Admin\AdminUserController::class, 'add_to_group'])->name('add_to_group');
-Route::post('/admin/add_to_group/{id}', [App\Http\Controllers\Admin\AdminUserController::class, 'add_to_group'])->name('add_to_group');
+Route::get('/admin/user/add_to_group/{id}', [App\Http\Controllers\Admin\AdminUserController::class, 'add_to_group'])->name('add_to_group');
+Route::post('/admin/user/add_to_group/{id}', [App\Http\Controllers\Admin\AdminUserController::class, 'add_to_group'])->name('add_to_group');
 
 
 Route::get('/admin/subjects', [App\Http\Controllers\Admin\AdminSubjectController::class, 'view_subjects'])->name('view_subjects');
@@ -26,6 +26,9 @@ Route::post('/admin/add_subject', [App\Http\Controllers\Admin\AdminSubjectContro
 Route::get('/admin/change_subject/{id}', [App\Http\Controllers\Admin\AdminSubjectController::class, 'change_subject'])->name('change_subject');
 Route::post('/admin/change_subject/{id}', [App\Http\Controllers\Admin\AdminSubjectController::class, 'change_subject'])->name('change_subject');
 Route::get('/admin/delete_subject/{id}', [App\Http\Controllers\Admin\AdminSubjectController::class, 'delete_subject'])->name('delete_subject');
+Route::get('/admin/subject/add_to_group/{id}', [App\Http\Controllers\Admin\AdminSubjectController::class, 'add_to_group'])->name('add_to_group');
+Route::post('/admin/subject/add_to_group/{id}', [App\Http\Controllers\Admin\AdminSubjectController::class, 'add_to_group'])->name('add_to_group');
+
 
 Route::get('/admin/groups', [App\Http\Controllers\Admin\AdminGroupController::class, 'view_groups'])->name('view_groups');
 Route::get('/admin/group/{id}', [App\Http\Controllers\Admin\AdminGroupController::class, 'view_group'])->name('view_group');

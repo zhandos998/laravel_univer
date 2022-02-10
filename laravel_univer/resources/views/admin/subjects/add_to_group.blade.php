@@ -7,7 +7,7 @@
             <div class="card">
                 <div class="card-header">{{ Auth::user()->roles[0]->name }}</div>
                 <div class="card-body">
-                <form method="POST" action="/admin/user/add_to_group/{{$id}}">
+                <form method="POST" action="/admin/subject/add_to_group/{{$id}}">
                     @csrf
                     <div class="form-group autocomplete">
                         <label for="group">Group</label>

@@ -38,8 +38,10 @@ class AdminUserController extends Controller
         ->leftJoin('roles', 'roles.id', '=', 'users_roles.role_id')
         ->select('users.id','users.name','users.email','roles.name as role')
         ->first();
+        $add_to_group = !(count(DB::table('users_groups')->where('user_id',$id)->get())>0);
+
         // dd($user);
-        return view('admin.users.user',['user'=>$user]);
+        return view('admin.users.user',['user'=>$user, 'add_to_group'=>$add_to_group]);
     }
 
     public function add_user(Request $request)
@@ -97,6 +99,7 @@ class AdminUserController extends Controller
 
     public function add_to_group(Request $request,$id)
     {
+
         if ($request->isMethod('post')){
             DB::table('users_groups')
             ->insert([

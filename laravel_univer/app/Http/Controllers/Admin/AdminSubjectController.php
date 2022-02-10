@@ -58,4 +58,21 @@ class AdminSubjectController extends Controller
         ->delete();
         return redirect("/admin/subjects");
     }
+
+    public function add_to_group(Request $request,$id)
+    {
+        if ($request->isMethod('post')){
+            DB::table('subjects_groups')
+            ->insert([
+                'subject_id' => $id,
+                'group_id' => $request->group_id
+            ]);
+            return redirect("/admin/subjects");
+        }
+        $groups = DB::table('groups')
+        ->join('users', 'users.id', '=', 'groups.id_supervisor')
+        ->select('groups.id', 'groups.class', 'groups.letter', 'users.name')
+        ->get();
+        return view('admin.subjects.add_to_group',['groups'=>$groups,'id'=>$id]);
+    }
 }

@@ -14,10 +14,11 @@
                         {{$student->id}}<br>
                         <a href="/admin/user/{{$student->id}}">{{$student->name}}</a><br>
                         {{$student->email}}<br>
+                        <a href="/admin/remove_from_group/{{$student->id}}"><button type="button" class="btn btn-outline-dark">Remove From Group</button></a><br>
                     @endforeach
                     <button type="button" class="btn btn-outline-dark"><a href="/admin/change_group/{{$group->id}}">Change Group</a></button><br>
                     <button type="button" class="btn btn-outline-dark"><a href="/admin/delete_group/{{$group->id}}">Delete Group</a></button><br>
-                    {{-- <button type="button" class="btn btn-outline-dark"><a href="/admin/add_students/{{$group->id}}">Add Students</a></button><br> --}}
+                    <button type="button" class="btn btn-outline-dark"><a href="/admin/group/view_subjects/{{$group->id}}">View Subjects</a></button><br>
                 </div>
             </div>
         </div>

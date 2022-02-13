@@ -1,4 +1,4 @@
-{{-- @extends('layouts.app')
+@extends('layouts.app')
 
 @section('content')
 <div class="container">
@@ -7,23 +7,27 @@
             <div class="card">
                 <div class="card-header">{{ Auth::user()->roles[0]->name }}</div>
                 <div class="card-body">
-                <form method="POST" action="/admin/add_students/{{$id}}">
+                <form method="POST" action="/admin/group/add_subject/{{$id}}">
                     @csrf
 
                     <div class="form-group autocomplete">
                         <label>Куда</label>
-                        <input class="input_name form-control" autocomplete="off">
-                        <input class="input_id" name="teacher_id" style="display: none">
+                        <input id="teacher_name" class="form-control" autocomplete="off">
+                        <input id="teacher_id" name="teacher_id" style="display: none">
                     </div>
                     <div class="form-group autocomplete">
                         <label>Куда</label>
-                        <input class="input_name form-control" autocomplete="off">
-                        <input class="input_id" name="teacher_id" style="display: none">
+                        <input id="subject_name" class="form-control" autocomplete="off">
+                        <input id="subject_id" name="subject_id" style="display: none">
                     </div>
                     <div class="form-group autocomplete">
                         <label>Куда</label>
-                        <input class="input_name form-control" autocomplete="off">
-                        <input class="input_id" name="teacher_id" style="display: none">
+                        <input id="week_day_name" class="form-control" autocomplete="off">
+                        <input id="week_day" name="week_day" style="display: none">
+                    </div>
+                    <div class="form-group autocomplete">
+                        <label>Куда</label>
+                        <input name="time" type="time" class="form-control">
                     </div>
                     <button type="submit" class="btn btn-primary">Create</button>
                 </form>
@@ -80,13 +84,27 @@
         }
     </style>
     <script>
-        var countries = [
-            @foreach ($students as $student)
-                {'id':{{$student->id}},'country':"{{$student->name}}"},
+
+        var teachers = [
+            @foreach ($teachers as $teacher)
+                {'id':{{$teacher->id}},'country':"{{$teacher->name}}"},
             @endforeach
         ];
+        var subjects = [
+            @foreach ($subjects as $subject)
+                {'id':{{$subject->id}},'country':"{{$subject->name}}"},
+            @endforeach
+        ];
+        var week_days = [
+                {'id':1,'country':"Monday"},
+                {'id':2,'country':"Tuesday"},
+                {'id':3,'country':"Wednesday"},
+                {'id':4,'country':"Thursday"},
+                {'id':5,'country':"Friday"},
+                {'id':6,'country':"Saturday"},
+        ];
 
-        function autocomplete(inp, arr,inp_iter) {
+        function autocomplete(inp, arr, input_id) {
             var currentFocus;
             inp.addEventListener("input", function(e) {
                 var a, b, i, val = this.value,col = 0,f=false;
@@ -106,7 +124,7 @@
                         b.innerHTML += arr[i]["country"].substr(val.length);
                         b.innerHTML += "<input type='hidden' value='" + arr[i]["country"] + "'>";
                         b.addEventListener("click", function(e) {
-                            addFinded(this.getElementsByTagName("input")[0].value,inp_iter);
+                            addFinded(this.getElementsByTagName("input")[0].value,input_id,inp, arr);
                             // inp.value = "";
                             closeAllLists();
                         });
@@ -136,7 +154,7 @@
                     if (currentFocus > -1) {
                     if (x)
                     {
-                        addFinded(x[currentFocus].innerText,inp_iter);
+                        addFinded(x[currentFocus].innerText,input_id,inp, arr);
                         x[currentFocus].click();
                     }
                     }
@@ -167,7 +185,7 @@
             });
         }
         finded=[];
-        function addFinded(country,inp_iter) {
+        function addFinded(country,input_id,inp, arr) {
             var b=true;
             for(var i=0;i<finded.length;i++)
             {
@@ -179,14 +197,14 @@
             }
             if (b)
             {
-                for(var i=0;i<countries.length;i++)
+                for(var i=0;i<arr.length;i++)
                 {
-                    if (countries[i]["country"]==country)
+                    if (arr[i]["country"]==country)
                     {
-                        var tn = document.getElementsByClassName("input_name")[inp_iter];
+                        var tn = inp;
                         tn.value = country;
-                        var ti = document.getElementsByClassName("input_id")[inp_iter];
-                        ti.value = countries[i]["id"];
+                        var ti = document.getElementById(input_id);
+                        ti.value = arr[i]["id"];
                         // var str = "<div id = \"finded-" + countries[i]["id"]+
                         // "\" class = \" mr-1 my-2\"><input style=\"display:none\" name=\"countries[]\" value=\""+countries[i]["id"]+"\"><span class=\"mr-1\">" + country +
                         // "</span><span style=\"cursor: pointer\" onclick=\"deleteFinded('"+countries[i]["id"]+
@@ -211,11 +229,10 @@
             elem.parentNode.removeChild(elem);
             console.log(this.innerHTML);
         }
-        var els = document.getElementsByClassName("input_name");
+        autocomplete(document.getElementById("teacher_name"), teachers, 'teacher_id');
+        autocomplete(document.getElementById("subject_name"), subjects, 'subject_id');
+        autocomplete(document.getElementById("week_day_name"), week_days, 'week_day');
 
-        Array.prototype.forEach.call(els, function(el,i) {
-            autocomplete(el, countries,i);
-        });
     </script>
 </div>
-@endsection --}}
+@endsection

@@ -12,7 +12,7 @@
                         {{$subject->name}}<br>
                         <button type="button" class="btn btn-outline-dark"><a href="/admin/change_subject/{{$subject->id}}">Change Subject</a></button><br>
                         <button type="button" class="btn btn-outline-dark"><a href="/admin/delete_subject/{{$subject->id}}">Delete Subject</a></button><br>
-                        <button type="button" class="btn btn-outline-dark"><a href="/admin/subject/add_to_group/{{$subject->id}}">Add to group</a></button>
+                        {{-- <button type="button" class="btn btn-outline-dark"><a href="/admin/subject/add_to_group/{{$subject->id}}">Add to group</a></button> --}}
                     @endforeach
 
                     <button type="button" class="btn btn-outline-dark"><a href="/admin/add_subject">Add Subject</a></button>

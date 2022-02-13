@@ -19,6 +19,7 @@ class CreateGroupsTable extends Migration
             $table->string("letter");
             $table->integer("id_supervisor");
             $table->timestamps();
+            $table->unique(['id','id_supervisor']);
         });
     }
 

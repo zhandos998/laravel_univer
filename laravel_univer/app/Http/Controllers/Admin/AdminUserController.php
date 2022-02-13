@@ -23,11 +23,11 @@ class AdminUserController extends Controller
 
     public function view_users()
     {
-        $users1 = DB::table('users')
+        $users = DB::table('users')
         ->leftJoin('users_roles', 'users.id', '=', 'users_roles.user_id')
         ->leftJoin('roles', 'roles.id', '=', 'users_roles.role_id')
-        ->select('users.id','users.name','users.email','roles.name as role');
-        $users = $users1->get();
+        ->select('users.id','users.name','users.email','roles.name as role')
+        ->get();
         return view('admin.users.users',['users'=>$users]);
     }
     public function view_user($id)

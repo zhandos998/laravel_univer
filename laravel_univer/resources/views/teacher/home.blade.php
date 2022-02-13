@@ -15,6 +15,10 @@
                     @endif
 
                     {{ __('Teacher!') }}
+                    @if (!is_null($group))
+                        <a href="/teacher/view_group/{{$group->id}}"><button type="button" class="btn btn-outline-dark">View My Group</button></a>
+                    @endif
+                    <a href="/teacher/timetable"><button type="button" class="btn btn-outline-dark">Timetable</button></a>
                 </div>
             </div>
         </div>

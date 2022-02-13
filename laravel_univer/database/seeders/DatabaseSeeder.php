@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
         $this->call(RoleSeeder::class);
         $this->call(UserSeeder::class);
         $this->call(SubjectSeeder::class);
+        $this->call(QuarterSeeder::class);
         // \App\Models\User::factory(10)->create();
     }
 }

@@ -52,6 +52,8 @@ Route::get('/admin/change_new/{id}', [App\Http\Controllers\Admin\AdminNewControl
 Route::post('/admin/change_new/{id}', [App\Http\Controllers\Admin\AdminNewController::class, 'change_new'])->name('change_new');
 Route::get('/admin/delete_new/{id}', [App\Http\Controllers\Admin\AdminNewController::class, 'delete_new'])->name('delete_new');
 
+Route::get('/admin/add_quarter', [App\Http\Controllers\Admin\AdminController::class, 'add_quarter'])->name('add_quarter');
+Route::post('/admin/add_quarter', [App\Http\Controllers\Admin\AdminController::class, 'add_quarter'])->name('add_quarter');
 
 
 // -----------------------------------------------------------------------------------------------------------------------
@@ -69,6 +71,7 @@ Route::get('/teacher/view_student/subject_{subject_id}/student_{student_id}', [A
 Route::post('/teacher/view_student/subject_{subject_id}/student_{student_id}', [App\Http\Controllers\Teacher\TeacherController::class, 'view_student'])->name('view_student');
 
 
+// /teacher/view_student/subject_1/student_1
 
 
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

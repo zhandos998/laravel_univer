@@ -3,7 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-
+use App\Models\Quarter;
+use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
@@ -26,5 +27,18 @@ class AdminController extends Controller
     public function index()
     {
         return view('admin.home');
+    }
+
+    public function add_quarter(Request $request)
+    {
+        if ($request->isMethod('post')){
+            $quarter = new Quarter();
+            $quarter->name=$request->name;
+            $quarter->date_to=$request->date_to;
+            $quarter->date_from=$request->date_from;
+            $quarter->save();
+            return redirect('/admin');
+        }
+        return view('admin.add_quarter');
     }
 }

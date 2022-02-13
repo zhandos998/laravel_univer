@@ -94,29 +94,34 @@ class TeacherController extends Controller
             $grade->grade = $request->grade;
             $grade->subject_id = $request->subject_id;
             $grade->quarter_id = DB::table('quarters')
-            ->where('date_to','<=',DB::raw('now()'))
-            ->where('date_from','>=',DB::raw('now()'))
-            ->first()->id;
+                ->where('date_to','<=',DB::raw('now()'))
+                ->where('date_from','>=',DB::raw('now()'))
+                ->first()->id;
             $grade->save();
 
             return back();
         }
         $student = DB::table('users')
-        ->where("id",$student_id)
-        ->first();
+            ->where("id",$student_id)
+            ->first();
         $subjects = DB::table('subjects')
-        ->get();
+            ->get();
         $grades = DB::table('grades')
-        ->where('subject_id',$subject_id)
-        ->where('teacher_id',Auth::id())
-        ->where('student_id',$student_id)
-        ->where('quarter_id',
-            DB::table('quarters')
+            ->where('subject_id',$subject_id)
+            ->where('teacher_id',Auth::id())
+            ->where('student_id',$student_id)
+            ->where('quarter_id',
+                DB::table('quarters')
+                ->where('date_to','<=',DB::raw('now()'))
+                ->where('date_from','>=',DB::raw('now()'))
+                ->first()->id
+            )
+            ->get();
+        $end_quarter = DB::table('quarters')
             ->where('date_to','<=',DB::raw('now()'))
             ->where('date_from','>=',DB::raw('now()'))
-            ->first()->id
-        )
-        ->get();
-        return view('teacher.view_student',['student'=>$student,'grades'=>$grades,'subjects'=>$subjects,'subject_id'=>$subject_id]);
+            ->select(DB::raw('DATEDIFF(`date_from`,now()) AS date_diff'))
+            ->first()->date_diff;
+        return view('teacher.view_student',['student'=>$student,'grades'=>$grades,'subjects'=>$subjects,'subject_id'=>$subject_id,'end_quarter'=>$end_quarter]);
     }
 }

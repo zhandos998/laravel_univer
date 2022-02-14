@@ -21,6 +21,7 @@
                     <button type="button" class="btn btn-outline-dark"><a href="/admin/groups">Groups</a></button>
                     <button type="button" class="btn btn-outline-dark"><a href="/admin/news">News</a></button>
                     <button type="button" class="btn btn-outline-dark"><a href="/admin/add_quarter">Add Quarter</a></button>
+                    <button type="button" class="btn btn-outline-dark"><a href="/admin/add_year">Add Year</a></button>
 
                 </div>
             </div>

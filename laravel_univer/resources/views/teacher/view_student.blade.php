@@ -27,6 +27,33 @@
                             <input name="subject_id" value="{{$subject_id}}" class="d-none">
                             <button type="submit" class="btn btn-primary">Create</button>
                         </form>
+                        @if (($end_quarter->date_diff<=7) && is_null($quarter_grades))
+                            <form method="POST" action="/teacher/quarter_grade">
+                                @csrf
+                                <input name="subject_id" value="{{$subject_id}}" class="d-none">
+                                <input name="student_id" value="{{$student->id}}" class="d-none">
+                                <input name="quarter_id" value="{{$end_quarter->id}}" class="d-none">
+                                <div class="form-group">
+                                    <label for="grade">Grade</label>
+                                    <input type="number" name="grade" class="form-control">
+                                </div>
+                                <button type="submit" class="btn btn-primary">Create</button>
+                            </form>
+                        @endif
+                        
+                        @if (($end_year->date_diff<=7) && is_null($year_grades))
+                            <form method="POST" action="/teacher/year_grade">
+                                @csrf
+                                <input name="subject_id" value="{{$subject_id}}" class="d-none">
+                                <input name="student_id" value="{{$student->id}}" class="d-none">
+                                <input name="year_id" value="{{$end_year->id}}" class="d-none">
+                                <div class="form-group">
+                                    <label for="grade">Grade</label>
+                                    <input type="number" name="grade" class="form-control">
+                                </div>
+                                <button type="submit" class="btn btn-primary">Create</button>
+                            </form>
+                        @endif
 
 
 

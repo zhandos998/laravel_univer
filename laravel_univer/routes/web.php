@@ -55,6 +55,9 @@ Route::get('/admin/delete_new/{id}', [App\Http\Controllers\Admin\AdminNewControl
 Route::get('/admin/add_quarter', [App\Http\Controllers\Admin\AdminController::class, 'add_quarter'])->name('add_quarter');
 Route::post('/admin/add_quarter', [App\Http\Controllers\Admin\AdminController::class, 'add_quarter'])->name('add_quarter');
 
+Route::get('/admin/add_year', [App\Http\Controllers\Admin\AdminController::class, 'add_year'])->name('add_year');
+Route::post('/admin/add_year', [App\Http\Controllers\Admin\AdminController::class, 'add_year'])->name('add_year');
+
 
 // -----------------------------------------------------------------------------------------------------------------------
 // -----------------------------------------------------------------------------------------------------------------------
@@ -69,6 +72,10 @@ Route::get('/teacher/group/add_document/subject_{subject_id}/group_{group_id}', 
 Route::post('/teacher/group/add_document/subject_{subject_id}/group_{group_id}', [App\Http\Controllers\Teacher\TeacherController::class, 'add_document'])->name('add_document');
 Route::get('/teacher/view_student/subject_{subject_id}/student_{student_id}', [App\Http\Controllers\Teacher\TeacherController::class, 'view_student'])->name('view_student');
 Route::post('/teacher/view_student/subject_{subject_id}/student_{student_id}', [App\Http\Controllers\Teacher\TeacherController::class, 'view_student'])->name('view_student');
+
+Route::post('/teacher/quarter_grade', [App\Http\Controllers\Teacher\TeacherController::class, 'quarter_grade'])->name('quarter_grade');
+
+Route::post('/teacher/year_grade', [App\Http\Controllers\Teacher\TeacherController::class, 'year_grade'])->name('year_grade');
 
 
 // /teacher/view_student/subject_1/student_1

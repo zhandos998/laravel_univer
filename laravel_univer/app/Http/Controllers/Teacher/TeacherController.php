@@ -120,8 +120,66 @@ class TeacherController extends Controller
         $end_quarter = DB::table('quarters')
             ->where('date_to','<=',DB::raw('now()'))
             ->where('date_from','>=',DB::raw('now()'))
-            ->select(DB::raw('DATEDIFF(`date_from`,now()) AS date_diff'))
-            ->first()->date_diff;
-        return view('teacher.view_student',['student'=>$student,'grades'=>$grades,'subjects'=>$subjects,'subject_id'=>$subject_id,'end_quarter'=>$end_quarter]);
+            ->select(DB::raw('DATEDIFF(`date_from`,now()) AS date_diff'),'id')
+            ->first();
+        $end_year = DB::table('years')
+            ->where('date_to','<=',DB::raw('now()'))
+            ->where('date_from','>=',DB::raw('now()'))
+            ->select(DB::raw('DATEDIFF(`date_from`,now()) AS date_diff'),'id')
+            ->first();
+
+        $quarter_grades = DB::table('quarter_grades')
+            ->where('subject_id',$subject_id)
+            ->where('student_id',$student_id)
+            ->where('quarter_id',$end_quarter->id)
+            ->first();
+        $year_grades = DB::table('year_grades')
+            ->where('subject_id',$subject_id)
+            ->where('student_id',$student_id)
+            ->where('year_id',$end_year->id)
+            ->first();
+        return view('teacher.view_student',[
+            'student'=>$student,
+            'grades'=>$grades,
+            'subjects'=>$subjects,
+            'subject_id'=>$subject_id,
+            'end_quarter'=>$end_quarter,
+            'quarter_grades'=>$quarter_grades,
+            'end_year'=>$end_year,
+            'year_grades'=>$year_grades
+        ]);
+    }
+
+    public function quarter_grade(Request $request)
+    {
+        if ($request->isMethod('post')){
+            DB::table('quarter_grades')
+            ->insert([
+                'student_id' => $request->student_id,
+                'subject_id' => $request->subject_id,
+                'quarter_id' => $request->quarter_id,
+                'grade' => $request->grade,
+            ]);
+
+            return back();
+        }
+        return back();
+    }
+
+    public function year_grade(Request $request)
+    {
+        if ($request->isMethod('post')){
+            // dd($request);
+            DB::table('year_grades')
+            ->insert([
+                'student_id' => $request->student_id,
+                'subject_id' => $request->subject_id,
+                'year_id' => $request->year_id,
+                'grade' => $request->grade,
+            ]);
+
+            return back();
+        }
+        return back();
     }
 }

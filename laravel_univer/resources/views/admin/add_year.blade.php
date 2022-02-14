@@ -16,7 +16,7 @@
 
                     {{ __('Admin!') }}
 
-                    <form method="POST" action="/admin/add_quarter">
+                    <form method="POST" action="/admin/add_year">
                         @csrf
                         <div class="form-group">
                             <label for="name">Name</label>

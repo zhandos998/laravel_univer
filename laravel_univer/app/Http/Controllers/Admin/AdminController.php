@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Quarter;
 use Illuminate\Http\Request;
+use App\Models\Year;
 
 class AdminController extends Controller
 {
@@ -40,5 +41,17 @@ class AdminController extends Controller
             return redirect('/admin');
         }
         return view('admin.add_quarter');
+    }
+    public function add_year(Request $request)
+    {
+        if ($request->isMethod('post')){
+            $quarter = new Year();
+            $quarter->name=$request->name;
+            $quarter->date_to=$request->date_to;
+            $quarter->date_from=$request->date_from;
+            $quarter->save();
+            return redirect('/admin');
+        }
+        return view('admin.add_year');
     }
 }

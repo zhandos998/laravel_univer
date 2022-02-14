@@ -18,6 +18,12 @@
                             {{$grade->created_at}}<br>
                         @endforeach
 
+                        @foreach ($student_documents as $document)
+                            {{$document->id}}|
+                            {{-- {{$document->created_at}}| --}}
+                            <a href="{{ asset($document->document) }}" download>{{$document->document}}</a><br>
+                        @endforeach
+
                         <form method="POST" action="/teacher/view_student/subject_{{$subject_id}}/student_{{$student->id}}">
                             @csrf
                             <div class="form-group">

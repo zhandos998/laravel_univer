@@ -72,13 +72,18 @@ Route::get('/teacher/group/add_document/subject_{subject_id}/group_{group_id}', 
 Route::post('/teacher/group/add_document/subject_{subject_id}/group_{group_id}', [App\Http\Controllers\Teacher\TeacherController::class, 'add_document'])->name('add_document');
 Route::get('/teacher/view_student/subject_{subject_id}/student_{student_id}', [App\Http\Controllers\Teacher\TeacherController::class, 'view_student'])->name('view_student');
 Route::post('/teacher/view_student/subject_{subject_id}/student_{student_id}', [App\Http\Controllers\Teacher\TeacherController::class, 'view_student'])->name('view_student');
-
 Route::post('/teacher/quarter_grade', [App\Http\Controllers\Teacher\TeacherController::class, 'quarter_grade'])->name('quarter_grade');
-
 Route::post('/teacher/year_grade', [App\Http\Controllers\Teacher\TeacherController::class, 'year_grade'])->name('year_grade');
 
 
-// /teacher/view_student/subject_1/student_1
+
+// -----------------------------------------------------------------------------------------------------------------------
+// -----------------------------------------------------------------------------------------------------------------------
+// -----------------------------------------------------------------------------------------------------------------------
 
 
-// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/student', [App\Http\Controllers\Student\StudentController::class, 'index'])->name('student');
+Route::get('/student/timetable', [App\Http\Controllers\Student\StudentController::class, 'timetable'])->name('timetable');
+Route::get('/student/view_lesson/subject_{subject_id}/teacher_{teacher_id}', [App\Http\Controllers\Student\StudentController::class, 'view_lesson'])->name('view_lesson');
+Route::get('/student/add_document/subject_{subject_id}/teacher_{teacher_id}', [App\Http\Controllers\Student\StudentController::class, 'add_document'])->name('add_document');
+Route::post('/student/add_document/subject_{subject_id}/teacher_{teacher_id}', [App\Http\Controllers\Student\StudentController::class, 'add_document'])->name('add_document');

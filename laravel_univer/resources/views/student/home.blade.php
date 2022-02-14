@@ -13,7 +13,9 @@
                             {{ session('status') }}
                         </div>
                     @endif
-                    {{ __('Register please!') }}
+
+                    {{ __('Student!') }}
+                    <a href="/student/timetable"><button type="button" class="btn btn-outline-dark">Timetable</button></a>
                 </div>
             </div>
         </div>

@@ -70,7 +70,7 @@ class TeacherController extends Controller
             // dd($request);
             $statement = DB::select("SHOW TABLE STATUS LIKE 'documents_groups'");
             $nextId = $statement[0]->Auto_increment;
-            $fileNameToStore = "/documents/document_".$nextId.".".$request->document->extension();
+            $fileNameToStore = "/documents_teachers/document_".$nextId.".".$request->document->extension();
             $request->document->storeAs('public/', $fileNameToStore);
             DB::table('documents_groups')
             ->insert([
@@ -138,6 +138,12 @@ class TeacherController extends Controller
             ->where('student_id',$student_id)
             ->where('year_id',$end_year->id)
             ->first();
+            
+        $student_documents = DB::table('documents_teachers')
+            ->where("teacher_id",Auth::id())
+            ->where("subject_id",$subject_id)
+            ->where("student_id",$student_id)
+            ->get();
         return view('teacher.view_student',[
             'student'=>$student,
             'grades'=>$grades,
@@ -146,7 +152,8 @@ class TeacherController extends Controller
             'end_quarter'=>$end_quarter,
             'quarter_grades'=>$quarter_grades,
             'end_year'=>$end_year,
-            'year_grades'=>$year_grades
+            'year_grades'=>$year_grades,
+            'student_documents'=>$student_documents
         ]);
     }
 

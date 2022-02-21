@@ -11,25 +11,25 @@
                     @csrf
 
                     <div class="form-group autocomplete">
-                        <label>Куда</label>
+                        <label>Мұғалімнің аты: </label>
                         <input id="teacher_name" class="form-control" autocomplete="off">
                         <input id="teacher_id" name="teacher_id" style="display: none">
                     </div>
                     <div class="form-group autocomplete">
-                        <label>Куда</label>
+                        <label>Пәннің аты: </label>
                         <input id="subject_name" class="form-control" autocomplete="off">
                         <input id="subject_id" name="subject_id" style="display: none">
                     </div>
                     <div class="form-group autocomplete">
-                        <label>Куда</label>
+                        <label>Аптаның аты: </label>
                         <input id="week_day_name" class="form-control" autocomplete="off">
                         <input id="week_day" name="week_day" style="display: none">
                     </div>
                     <div class="form-group autocomplete">
-                        <label>Куда</label>
+                        <label>Уақыты: </label>
                         <input name="time" type="time" class="form-control">
                     </div>
-                    <button type="submit" class="btn btn-primary">Create</button>
+                    <button type="submit" class="btn btn-primary">Қосу</button>
                 </form>
                 </div>
             </div>
@@ -96,12 +96,12 @@
             @endforeach
         ];
         var week_days = [
-                {'id':1,'country':"Monday"},
-                {'id':2,'country':"Tuesday"},
-                {'id':3,'country':"Wednesday"},
-                {'id':4,'country':"Thursday"},
-                {'id':5,'country':"Friday"},
-                {'id':6,'country':"Saturday"},
+                {'id':1,'country':"Дүйсенбі"},
+                {'id':2,'country':"Сейсенбі"},
+                {'id':3,'country':"Сәрсенбі"},
+                {'id':4,'country':"Бейсенбі"},
+                {'id':5,'country':"Жұма"},
+                {'id':6,'country':"Сенбі"},
         ];
 
         function autocomplete(inp, arr, input_id) {
@@ -135,7 +135,7 @@
                 if (!f)
                 {
                     b = document.createElement("DIV");
-                    b.innerHTML = "Not founded";
+                    b.innerHTML = "Табылмады...";
                     a.appendChild(b);
                 }
             });
@@ -205,12 +205,6 @@
                         tn.value = country;
                         var ti = document.getElementById(input_id);
                         ti.value = arr[i]["id"];
-                        // var str = "<div id = \"finded-" + countries[i]["id"]+
-                        // "\" class = \" mr-1 my-2\"><input style=\"display:none\" name=\"countries[]\" value=\""+countries[i]["id"]+"\"><span class=\"mr-1\">" + country +
-                        // "</span><span style=\"cursor: pointer\" onclick=\"deleteFinded('"+countries[i]["id"]+
-                        // "')\">❌</span></div>";
-                        // d.innerHTML+=str;
-                        // finded.push(countries[i]);
                         break;
                     }
                 }

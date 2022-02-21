@@ -10,12 +10,12 @@
                 <form method="POST" action="/admin/subject/add_to_group/{{$id}}">
                     @csrf
                     <div class="form-group autocomplete">
-                        <label for="group">Group</label>
+                        <label for="group">Мұғалімнің аты: </label>
                         <input id="teacher_name" class="form-control" autocomplete="off">
                         <input id="teacher_id" name="group_id" style="display: none">
                     </div>
 
-                    <button type="submit" class="btn btn-primary">Create</button>
+                    <button type="submit" class="btn btn-primary">Қосу</button>
                 </form>
                 </div>
             </div>
@@ -107,7 +107,7 @@
                 if (!f)
                 {
                     b = document.createElement("DIV");
-                    b.innerHTML = "Not founded";
+                    b.innerHTML = "Табылмады...";
                     a.appendChild(b);
                 }
             });

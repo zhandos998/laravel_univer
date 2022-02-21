@@ -10,19 +10,19 @@
                 <form method="POST" action="/admin/add_group">
                     @csrf
                     <div class="form-group">
-                        <label for="class">Class</label>
-                        <input name="class" class="form-control" placeholder="Class">
+                        <label for="class">Сынып: </label>
+                        <input name="class" class="form-control" placeholder="Сынып">
                     </div>
                     <div class="form-group">
-                        <label for="letter">Letter</label>
-                        <input name="letter" class="form-control" placeholder="Letter">
+                        <label for="letter">Әріпі: </label>
+                        <input name="letter" class="form-control" placeholder="Әріпі">
                     </div>
                     <div class="form-group autocomplete">
-                        <label>Куда</label>
+                        <label>Мұғалімнің аты: </label>
                         <input id="teacher_name" class="form-control" autocomplete="off">
                         <input id="teacher_id" name="teacher_id" style="display: none">
                     </div>
-                    <button type="submit" class="btn btn-primary">Create</button>
+                    <button type="submit" class="btn btn-primary">Қосу</button>
                 </form>
                 </div>
             </div>
@@ -114,7 +114,7 @@
                 if (!f)
                 {
                     b = document.createElement("DIV");
-                    b.innerHTML = "Not founded";
+                    b.innerHTML = "Табылмады...";
                     a.appendChild(b);
                 }
             });
@@ -184,12 +184,6 @@
                         tn.value = country;
                         var ti = document.getElementById("teacher_id");
                         ti.value = countries[i]["id"];
-                        // var str = "<div id = \"finded-" + countries[i]["id"]+
-                        // "\" class = \" mr-1 my-2\"><input style=\"display:none\" name=\"countries[]\" value=\""+countries[i]["id"]+"\"><span class=\"mr-1\">" + country +
-                        // "</span><span style=\"cursor: pointer\" onclick=\"deleteFinded('"+countries[i]["id"]+
-                        // "')\">❌</span></div>";
-                        // d.innerHTML+=str;
-                        // finded.push(countries[i]);
                         break;
                     }
                 }

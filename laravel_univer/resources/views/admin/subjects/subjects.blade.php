@@ -7,15 +7,29 @@
             <div class="card">
                 <div class="card-header">{{ Auth::user()->roles[0]->name }}</div>
                 <div class="card-body">
+                    <table class="table">
+                        <thead>
+                          <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Пән</th>
+                            <th scope="col"></th>
+                            <th scope="col"></th>
+                          </tr>
+                        </thead>
+                        <tbody>
                     @foreach ($subjects as $subject)
-                        {{$subject->id}}<br>
-                        {{$subject->name}}<br>
-                        <button type="button" class="btn btn-outline-dark"><a href="/admin/change_subject/{{$subject->id}}">Change Subject</a></button><br>
-                        <button type="button" class="btn btn-outline-dark"><a href="/admin/delete_subject/{{$subject->id}}">Delete Subject</a></button><br>
-                        {{-- <button type="button" class="btn btn-outline-dark"><a href="/admin/subject/add_to_group/{{$subject->id}}">Add to group</a></button> --}}
+                    
+                    <tr>
+                        <th scope="row">{{$subject->id}}</th>
+                        <td>{{$subject->name}}</td>
+                        <td><a href="/admin/change_subject/{{$subject->id}}"><button type="button" class="btn btn-outline-dark">Пәнді өзгерту</button></a></td>
+                        <td><a href="/admin/delete_subject/{{$subject->id}}"><button type="button" class="btn btn-outline-dark">Пәнді жою</button></a></td>
+                    </tr>
                     @endforeach
+                        </tbody>
+                    </table>
 
-                    <button type="button" class="btn btn-outline-dark"><a href="/admin/add_subject">Add Subject</a></button>
+                    <a href="/admin/add_subject"><button type="button" class="btn btn-outline-dark">Пәнді қосу</button></a>
                 </div>
             </div>
         </div>

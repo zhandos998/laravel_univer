@@ -16,16 +16,16 @@ class SubjectSeeder extends Seeder
     {
 
         $subject = new Subjects();
-        $subject->name = 'matem';
+        $subject->name = 'Математика';
         $subject->save();
         $subject = new Subjects();
-        $subject->name = 'kazakh';
+        $subject->name = 'Қазақ тілі';
         $subject->save();
         $subject = new Subjects();
-        $subject->name = 'russia';
+        $subject->name = 'Орыс тілі';
         $subject->save();
         $subject = new Subjects();
-        $subject->name = 'history';
+        $subject->name = 'Қазақстан тарихы';
         $subject->save();
     }
 }

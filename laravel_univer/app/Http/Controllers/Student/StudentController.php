@@ -92,18 +92,18 @@ class StudentController extends Controller
         ->first();
 
         $documents = DB::table('documents_groups')
-        ->where("teacher_id",$teacher_id)
-        ->where("subject_id",$subject_id)
-        ->join('groups', 'groups.id', '=', 'documents_groups.group_id')
-        ->join('users_groups', 'groups.id', '=', 'users_groups.group_id')
-        ->where("users_groups.user_id",Auth::id())
-        ->get();
+            ->where("teacher_id",$teacher_id)
+            ->where("subject_id",$subject_id)
+            ->join('groups', 'groups.id', '=', 'documents_groups.group_id')
+            ->join('users_groups', 'groups.id', '=', 'users_groups.group_id')
+            ->where("users_groups.user_id",Auth::id())
+            ->get();
 
         $my_documents = DB::table('documents_teachers')
-        ->where("teacher_id",$teacher_id)
-        ->where("subject_id",$subject_id)
-        ->where("student_id",Auth::id())
-        ->get();
+            ->where("teacher_id",$teacher_id)
+            ->where("subject_id",$subject_id)
+            ->where("student_id",Auth::id())
+            ->get();
 
         return view('student.view_lesson',[
             'grades'=>$grades,

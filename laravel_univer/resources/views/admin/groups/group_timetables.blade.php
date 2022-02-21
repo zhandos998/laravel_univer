@@ -8,14 +8,31 @@
                 <div class="card-header">{{ Auth::user()->roles[0]->name }}</div>
                 <div class="card-body">
 
-                    <button type="button" class="btn btn-outline-dark"><a href="/admin/group/add_subject/{{$id}}">Add Subject</a></button>
+                    <a href="/admin/group/add_subject/{{$id}}"><button type="button" class="btn btn-outline-dark">Пәнді қосу</button></a>
+
+                    <table class="table">
+                        <thead>
+                          <tr>
+                            <th scope="col">Пән</th>
+                            <th scope="col">Мұғалім</th>
+                            <th scope="col">Апта күні</th>
+                            <th scope="col">Уақыты</th>
+                            <th scope="col"></th>
+                          </tr>
+                        </thead>
+                        <tbody>
                     @foreach ($timetables as $timetable)
-                    {{$timetable->subject_name}}</a><br>
-                    {{$timetable->teacher_name}}<br>
-                    {{$timetable->week_day}}<br>
-                    {{$timetable->time}}<br>
-                    <a href="/admin/group/delete_subject/{{$timetable->id}}"><button type="button" class="btn btn-outline-dark">Delete Subject</button></a><br>
+                    <tr>
+                        <th scope="row">{{$timetable->subject_name}}</th>
+                        <td>{{$timetable->teacher_name}}</td>
+                        <td>{{$timetable->week_day}}</td>
+                        <td>{{$timetable->time}}</td>
+                        <td><a href="/admin/group/delete_subject/{{$timetable->id}}"><button type="button" class="btn btn-outline-dark">Delete Subject</button></a></td>
+                    </tr>
                     @endforeach
+                            
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>

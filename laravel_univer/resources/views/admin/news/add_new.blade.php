@@ -10,14 +10,14 @@
                 <form method="POST" action="/admin/add_new">
                     @csrf
                     <div class="form-group">
-                        <label for="title">Title</label>
-                        <input name="title" class="form-control" placeholder="Title">
+                        <label for="title">Жаңалықтың тақырыбы</label>
+                        <input name="title" class="form-control" placeholder="Жаңалықтың тақырыбы">
                     </div>
                     <div class="form-group">
-                        <label for="discription">Discription</label>
-                        <textarea name="discription" class="form-control" placeholder="Letter"></textarea>
+                        <label for="discription">Текст</label>
+                        <textarea name="discription" class="form-control" placeholder="Текст"></textarea>
                     </div>
-                    <button type="submit" class="btn btn-primary">Create</button>
+                    <button type="submit" class="btn btn-primary">Қосу</button>
                 </form>
                 </div>
             </div>

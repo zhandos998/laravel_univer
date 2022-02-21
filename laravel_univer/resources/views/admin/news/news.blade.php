@@ -8,15 +8,33 @@
                 <div class="card-header">{{ Auth::user()->roles[0]->name }}</div>
                 <div class="card-body">
 
-                    <button type="button" class="btn btn-outline-dark"><a href="/admin/add_new">Add New</a></button>
+                    <button type="button" class="btn btn-outline-dark"><a href="/admin/add_new">Жаңалықты қосу</a></button>
+                    <table class="table">
+                        <thead>
+                          <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Тақырыбы</th>
+                            <th scope="col">Дата</th>
+                            <th scope="col"></th>
+                            <th scope="col"></th>
+                          </tr>
+                        </thead>
+                        <tbody>
                     @foreach ($news as $new)
-                    {{$new->id}}<br>
-                    {{$new->title}}<br>
-                    {{$new->discription}}<br>
-                    {{$new->created_at}}<br>
-                    <button type="button" class="btn btn-outline-dark"><a href="/admin/change_new/{{$new->id}}">Change New</a></button><br>
-                    <button type="button" class="btn btn-outline-dark"><a href="/admin/delete_new/{{$new->id}}">Delete New</a></button><br>
+                    
+                    <tr>
+                        <th scope="row">{{$new->id}}</th>
+                        <td>{{$new->title}}</td>
+                        <td>{{$new->created_at}}</td>
+                        <td><a href="/admin/change_new/{{$new->id}}"><button type="button" class="btn btn-outline-dark">Жаңалықты өзгерту</button></a></td>
+                        <td><a href="/admin/delete_new/{{$new->id}}"><button type="button" class="btn btn-outline-dark">Жаңалықты жою</button></a></td>
+                    </tr>
+
+                    
+                    
                     @endforeach
+                    </tbody>
+                  </table>
                 </div>
             </div>
         </div>

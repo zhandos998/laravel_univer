@@ -10,10 +10,10 @@
                     <form method="POST" action="/admin/add_subject">
                         @csrf
                         <div class="form-group">
-                            <label for="name">Subject name</label>
-                            <input name="name" type="name" class="form-control" placeholder="Subject">
+                            <label for="name">Пәннің аты: </label>
+                            <input name="name" type="name" class="form-control" placeholder="Пәннің аты">
                         </div>
-                        <button type="submit" class="btn btn-primary">Create</button>
+                        <button type="submit" class="btn btn-primary">Қосу</button>
                     </form>
 
                 </div>

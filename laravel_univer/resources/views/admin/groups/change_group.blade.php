@@ -10,19 +10,19 @@
                     <form method="POST" action="/admin/change_group/{{$group->id}}">
                         @csrf
                         <div class="form-group">
-                            <label for="class">Class</label>
-                            <input name="class" class="form-control" placeholder="Class" value="{{$group->class}}">
+                            <label for="class">Сынып: </label>
+                            <input name="class" class="form-control" placeholder="Сынып" value="{{$group->class}}">
                         </div>
                         <div class="form-group">
-                            <label for="letter">Letter</label>
-                            <input name="letter" class="form-control" placeholder="Letter" value="{{$group->letter}}">
+                            <label for="letter">Әріпі: </label>
+                            <input name="letter" class="form-control" placeholder="Әріпі" value="{{$group->letter}}">
                         </div>
                         <div class="form-group autocomplete">
-                            <label>Куда</label>
+                            <label>Мұғалімнің аты: </label>
                             <input id="teacher_name" class="form-control" autocomplete="off" value="{{$group->name}}">
                             <input id="teacher_id" name="teacher_id" style="display: none" value="{{$group->id_supervisor}}">
                         </div>
-                        <button type="submit" class="btn btn-primary">Change</button>
+                        <button type="submit" class="btn btn-primary">Өзгерту</button>
                     </form>
                     </div>
             </div>
@@ -104,7 +104,6 @@
                         b.innerHTML += "<input type='hidden' value='" + arr[i]["country"] + "'>";
                         b.addEventListener("click", function(e) {
                             addFinded(this.getElementsByTagName("input")[0].value);
-                            // inp.value = "";
                             closeAllLists();
                         });
                         a.appendChild(b);
@@ -114,7 +113,7 @@
                 if (!f)
                 {
                     b = document.createElement("DIV");
-                    b.innerHTML = "Not founded";
+                    b.innerHTML = "Табылмады...";
                     a.appendChild(b);
                 }
             });

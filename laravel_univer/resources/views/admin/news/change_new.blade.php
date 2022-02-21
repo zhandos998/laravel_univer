@@ -10,14 +10,14 @@
                     <form method="POST" action="/admin/change_new/{{$new->id}}">
                         @csrf
                         <div class="form-group">
-                            <label for="title">Title</label>
-                            <input name="title" class="form-control" placeholder="Title" value="{{$new->title}}">
+                            <label for="title">Жаңалықтың тақырыбы</label>
+                            <input name="title" class="form-control" placeholder="Жаңалықтың тақырыбы" value="{{$new->title}}">
                         </div>
                         <div class="form-group">
-                            <label for="discription">Discription</label>
-                            <textarea name="discription" class="form-control" placeholder="Letter">{{$new->discription}}</textarea>
+                            <label for="discription">Текст</label>
+                            <textarea name="discription" class="form-control" placeholder="Текст">{{$new->discription}}</textarea>
                         </div>
-                        <button type="submit" class="btn btn-primary">Change</button>
+                        <button type="submit" class="btn btn-primary">Өзгерту</button>
                     </form>
                 </div>
             </div>

@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Dashboard') }}</div>
+                <div class="card-header">{{ __('Admin!') }}</div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -14,14 +14,12 @@
                         </div>
                     @endif
 
-                    {{ __('Admin!') }}
-
-                    <button type="button" class="btn btn-outline-dark"><a href="/admin/users">Users</a></button>
-                    <button type="button" class="btn btn-outline-dark"><a href="/admin/subjects">Subjects</a></button>
-                    <button type="button" class="btn btn-outline-dark"><a href="/admin/groups">Groups</a></button>
-                    <button type="button" class="btn btn-outline-dark"><a href="/admin/news">News</a></button>
-                    <button type="button" class="btn btn-outline-dark"><a href="/admin/add_quarter">Add Quarter</a></button>
-                    <button type="button" class="btn btn-outline-dark"><a href="/admin/add_year">Add Year</a></button>
+                    <a href="/admin/users"><button type="button" class="btn btn-outline-dark">Қолданушылар</button></a>
+                    <a href="/admin/subjects"><button type="button" class="btn btn-outline-dark">Пәндер</button></a>
+                    <a href="/admin/groups"><button type="button" class="btn btn-outline-dark">Сыныптар</button></a>
+                    <a href="/admin/news"><button type="button" class="btn btn-outline-dark">Жаңалықтар</button></a>
+                    <a href="/admin/add_quarter"><button type="button" class="btn btn-outline-dark">Тоқсан қосу</button></a>
+                    <a href="/admin/add_year"><button type="button" class="btn btn-outline-dark">Оқу жылын қосу</button></a>
 
                 </div>
             </div>

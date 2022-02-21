@@ -46,6 +46,7 @@ Route::get('/admin/group/delete_subject/{id}', [App\Http\Controllers\Admin\Admin
 
 
 Route::get('/admin/news', [App\Http\Controllers\Admin\AdminNewController::class, 'view_news'])->name('view_news');
+Route::get('/admin/news/{id}', [App\Http\Controllers\Admin\AdminNewController::class, 'view_new'])->name('view_new');
 Route::get('/admin/add_new', [App\Http\Controllers\Admin\AdminNewController::class, 'add_new'])->name('add_new');
 Route::post('/admin/add_new', [App\Http\Controllers\Admin\AdminNewController::class, 'add_new'])->name('add_new');
 Route::get('/admin/change_new/{id}', [App\Http\Controllers\Admin\AdminNewController::class, 'change_new'])->name('change_new');

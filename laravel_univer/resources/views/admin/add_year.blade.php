@@ -14,7 +14,7 @@
                         </div>
                     @endif
 
-                    {{ __('Admin!') }}
+                    
 
                     <form method="POST" action="/admin/add_year">
                         @csrf

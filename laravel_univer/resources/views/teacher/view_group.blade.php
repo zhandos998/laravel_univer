@@ -5,24 +5,51 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Dashboard') }}</div>
+                <div class="card-header">{{ Auth::user()->roles[0]->name }}</div>
 
                 <div class="card-body">
-                    {{-- {{$group->class}}<br>
-                    {{$group->letter}}<br>
-                    {{$group->name}}<br> --}}
-                    @foreach ($students as $student)
-                        {{$student->id}}<br>
-                        <a href="/teacher/view_student/subject_{{$subject_id}}/student_{{$student->id}}">{{$student->name}}</a><br>
-                        {{$student->email}}<br>
-                    @endforeach
-
-                    @foreach ($documents as $document)
-                        {{$document->id}}<br>
-                        {{$document->date_from}}<br>
-                        <a href="{{ asset($document->document) }}" download>{{$document->document}}</a><br>
-                    @endforeach
-                    <button type="button" class="btn btn-outline-dark"><a href="/teacher/group/add_document/subject_{{$subject_id}}/group_{{$group_id}}">Add document</a></button><br>
+                    <table class="table">
+                        <thead>
+                          <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Аты-жөні</th>
+                            <th scope="col">E-mail</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                        @foreach ($students as $student)
+                        <tr>
+                            <th>{{$student->id}}</th>
+                            <td>
+                                @if ($subject_id!=0)<a href="/teacher/view_student/subject_{{$subject_id}}/student_{{$student->id}}">@endif{{$student->name}}</a></td>
+                            <td>{{$student->email}}</td>
+                        </tr>
+                        @endforeach
+                    
+                            
+                        </tbody>
+                    </table>
+                    @if ($subject_id!=0)
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Орындалу уақыты</th>
+                                    <th scope="col">Документ</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            @foreach ($documents as $document)
+                                <tr>
+                                    <th>{{$document->id}}</th>
+                                    <td>{{date_format(date_create($document->date_from), 'd.m.Y')}}</td>
+                                    <td><a href="{{ asset($document->document) }}" download>{{$document->document}}</a></td>
+                                </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
+                    <button type="button" class="btn btn-outline-dark"><a href="/teacher/group/add_document/subject_{{$subject_id}}/group_{{$group_id}}">Документ қосу</a></button><br>
+                    @endif
                 </div>
             </div>
         </div>

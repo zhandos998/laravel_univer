@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Dashboard') }}</div>
+                <div class="card-header">{{ Auth::user()->roles[0]->name }}</div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -18,18 +18,18 @@
                     <form method="POST" action="/admin/add_quarter">
                         @csrf
                         <div class="form-group">
-                            <label for="name">Name</label>
+                            <label for="name">Тоқсанның аты: </label>
                             <input name="name" class="form-control">
                         </div>
                         <div class="form-group">
-                            <label for="date_to">date_to</label>
+                            <label for="date_to">Басталу уақыты: </label>
                             <input type="date" name="date_to" class="form-control">
                         </div>
                         <div class="form-group">
-                            <label for="date_from">date_from</label>
+                            <label for="date_from">Аяқталу уақыты: </label>
                             <input type="date" name="date_from" class="form-control">
                         </div>
-                        <button type="submit" class="btn btn-primary">Create</button>
+                        <button type="submit" class="btn btn-primary">Қосу</button>
                     </form>
 
                 </div>

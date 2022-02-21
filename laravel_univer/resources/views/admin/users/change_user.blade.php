@@ -10,38 +10,37 @@
                     <form method="POST" action="/admin/change_user/{{$user->id}}">
                         @csrf
                         <div class="form-group">
-                            <label for="username">Username</label>
-                            <input name="name" type="username" class="form-control" placeholder="Username" value="{{$user->name}}">
+                            <label for="username">Аты-жөні: </label>
+                            <input name="name" type="username" class="form-control" placeholder="Аты-жөні" value="{{$user->name}}">
                         </div>
                         <div class="form-group">
-                            <label for="email">Email address</label>
-                            <input name="email" type="email" class="form-control" placeholder="Enter email" value="{{$user->email}}">
+                            <label for="email">E-mail: </label>
+                            <input name="email" type="email" class="form-control" placeholder="E-mail" value="{{$user->email}}">
                         </div>
                         <div class="form-group">
-                            <label for="password">Password</label>
-                            <input name="password" type="password" class="form-control" placeholder="Password">
+                            <label for="password">Құпия сөз: </label>
+                            <input name="password" type="password" class="form-control" placeholder="Құпия сөз">
                         </div>
                         <div class="form-check">
                             <input class="form-check-input" type="radio" name="role" value="0" @if (is_null($user->role)) checked @endif>
                             <label class="form-check-label">
-                                Student
+                                Студент
                             </label>
                         </div>
                         <div class="form-check">
                             <input class="form-check-input" type="radio" name="role" value="1" @if ($user->role==1) checked @endif>
                             <label class="form-check-label">
-                                Teacher
+                                Мұғалім
                             </label>
                         </div>
                         <div class="form-check">
                             <input class="form-check-input" type="radio" name="role" value="2" @if ($user->role==2) checked @endif>
                             <label class="form-check-label">
-                                Admin
+                                Администратор
                             </label>
                         </div>
-                        <button type="submit" class="btn btn-primary">Change</button>
+                        <button type="submit" class="btn btn-primary">Қосу</button>
                     </form>
-                    {{$user->role}}<br>
                     </div>
             </div>
         </div>

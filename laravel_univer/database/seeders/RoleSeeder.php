@@ -16,15 +16,15 @@ class RoleSeeder extends Seeder
     {
         //
         $teacher = new Role();
-        $teacher->name = 'Teacher';
+        $teacher->name = 'Мұғалім';
         $teacher->slug = 'teacher';
         $teacher->save();
         $admin = new Role();
-        $admin->name = 'Admin';
+        $admin->name = 'Админ';
         $admin->slug = 'admin';
         $admin->save();
         $student = new Role();
-        $student->name = 'Student';
+        $student->name = 'Студент';
         $student->slug = 'student';
         $student->save();
     }

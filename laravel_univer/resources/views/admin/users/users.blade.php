@@ -13,18 +13,25 @@
                         <thead>
                           <tr>
                             <th scope="col">#</th>
-                            <th scope="col">Пән</th>
-                            <th scope="col"></th>
-                            <th scope="col"></th>
+                            <th scope="col">Аты-жөні</th>
+                            <th scope="col">E-mail</th>
+                            <th scope="col">Рөл</th>
                           </tr>
                         </thead>
                         <tbody>
                     @foreach ($users as $user)
-                    {{$user->id}}<br>
-                    <a href="/admin/user/{{$user->id}}">{{$user->name}}</a><br>
-                    {{$user->email}}<br>
-                    {{$user->role}}<br>
+                    
+                    <tr>
+                        <th scope="row">{{$user->id}}</th>
+                        <td><a href="/admin/user/{{$user->id}}">{{$user->name}}</a></td>
+                        <td>{{$user->email}}</td>
+                        <td>{{$user->role}}</td>
+                    </tr>
+
                     @endforeach
+                            
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>

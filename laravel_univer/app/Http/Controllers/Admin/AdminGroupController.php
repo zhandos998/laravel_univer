@@ -121,7 +121,15 @@ class AdminGroupController extends Controller
         ->join('users', 'timetables.teacher_id', '=', 'users.id')
         ->select('timetables.id','subjects.name as subject_name','users.name as teacher_name','timetables.week_day','timetables.time')
         ->get();
-        return view('admin.groups.group_timetables',["timetables"=>$timetables,'id'=>$id]);
+        $week_days = [
+            "Дүйсенбі",
+            "Сейсенбі",
+            "Сәрсенбі",
+            "Бейсенбі",
+            "Жұма",
+            "Сенбі"
+        ];
+        return view('admin.groups.group_timetables',["timetables"=>$timetables,'id'=>$id,'week_days'=>$week_days]);
     }
 
     public function add_subject(Request $request,$id)

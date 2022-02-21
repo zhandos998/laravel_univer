@@ -43,7 +43,14 @@ class StudentController extends Controller
         ->where('users_groups.user_id',Auth::id())
         ->select('subjects.name as subject_name','subject_id','users.name as teacher_name','users.id as teacher_id','timetables.week_day','timetables.time')
         ->get();
-        $week_days = ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+        $week_days = [
+            "Дүйсенбі",
+            "Сейсенбі",
+            "Сәрсенбі",
+            "Бейсенбі",
+            "Жұма",
+            "Сенбі"
+        ];
         // dd($timetables);
         return view('student.view_timetable',['timetables'=>$timetables ,'week_days' => $week_days]);
     }

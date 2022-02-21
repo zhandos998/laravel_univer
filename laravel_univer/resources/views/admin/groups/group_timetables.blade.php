@@ -25,8 +25,8 @@
                     <tr>
                         <th scope="row">{{$timetable->subject_name}}</th>
                         <td>{{$timetable->teacher_name}}</td>
-                        <td>{{$timetable->week_day}}</td>
-                        <td>{{$timetable->time}}</td>
+                        <td>{{$week_days[$timetable->week_day-1]}}</td>
+                        <td>{{date_format(date_create($timetable->time), 'H:i')}}</td>
                         <td><a href="/admin/group/delete_subject/{{$timetable->id}}"><button type="button" class="btn btn-outline-dark">Delete Subject</button></a></td>
                     </tr>
                     @endforeach

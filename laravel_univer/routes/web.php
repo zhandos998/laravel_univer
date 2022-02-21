@@ -75,6 +75,7 @@ Route::get('/teacher/view_student/subject_{subject_id}/student_{student_id}', [A
 Route::post('/teacher/view_student/subject_{subject_id}/student_{student_id}', [App\Http\Controllers\Teacher\TeacherController::class, 'view_student'])->name('view_student');
 Route::post('/teacher/quarter_grade', [App\Http\Controllers\Teacher\TeacherController::class, 'quarter_grade'])->name('quarter_grade');
 Route::post('/teacher/year_grade', [App\Http\Controllers\Teacher\TeacherController::class, 'year_grade'])->name('year_grade');
+Route::get('/teacher/view_group/{group_id}', [App\Http\Controllers\Teacher\TeacherController::class, 'view_group'])->name('view_group');
 
 
 

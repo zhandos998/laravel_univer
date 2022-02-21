@@ -35,7 +35,7 @@ class TeacherController extends Controller
     }
 
 
-    public function view_group($subject_id,$group_id)
+    public function view_group($group_id,$subject_id=0)
     {
         $students = DB::table('users')
         ->join('users_groups', 'users.id', '=', 'users_groups.user_id')
@@ -61,7 +61,15 @@ class TeacherController extends Controller
         ->join('subjects', 'timetables.subject_id', '=', 'subjects.id')
         ->select('timetables.id','subjects.name as subject_name','group_id','subject_id','groups.class as group_class','groups.letter as group_letter','timetables.week_day','timetables.time')
         ->get();
-        return view('teacher.view_timetable',['timetables'=>$timetables]);
+        $week_days = [
+            "Дүйсенбі",
+            "Сейсенбі",
+            "Сәрсенбі",
+            "Бейсенбі",
+            "Жұма",
+            "Сенбі"
+        ];
+        return view('teacher.view_timetable',['timetables'=>$timetables,'week_days'=>$week_days]);
     }
 
     public function add_document(Request $request,$subject_id,$group_id)

@@ -5,38 +5,80 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Dashboard') }}</div>
+                <div class="card-header">{{ Auth::user()->roles[0]->name }}</div>
 
                 <div class="card-body">
-                    Teacher name: {{$teacher->name}}<br>
-                    Subject name: {{$subject->name}}<br>
-                    Grades:<br>
+                    Мұғалім: {{$teacher->name}}<br>
+                    Пән: {{$subject->name}}<br>
+                    Бағалар:<br>
+                    <table class="table">
+                        <thead>
+                          <tr>
+                            <th scope="col">Баға</th>
+                            <th scope="col">Дата</th>
+                          </tr>
+                        </thead>
+                        <tbody>
                     @foreach ($grades as $grade)
-                        {{date_format(date_create($grade->created_at), 'd.m.Y')}} |
-                        {{$grade->grade}}<br>
+                            <tr>
+                                <th>{{$grade->grade}}</th>
+                                <td>{{date_format(date_create($grade->created_at), 'd.m.Y')}}</td>
+                            </tr>
                     @endforeach
+                    
+                        </tbody>
+                    </table>
 
                     @if (!is_null($quarter_grade))
-                        Quarter grade: {{$quarter_grade->grade}}<br>
+                        Тоқсандық баға: {{$quarter_grade->grade}}<br>
                     @endif
 
                     @if (!is_null($year_grade))
-                        Year grade: {{$year_grade->grade}}<br>
+                        Жылдық баға: {{$year_grade->grade}}<br>
                     @endif
-                    My Documents:<br>
-                    @foreach ($my_documents as $my_document)
-                        {{$my_document->id}}|
-                        {{-- {{$my_document->created_at}}| --}}
-                        <a href="{{ asset($my_document->document) }}" download>{{$my_document->document}}</a><br>
-                    @endforeach
+                    Менің документтерім:<br>
                     
-                    Teacher Documents:<br>
-                    @foreach ($documents as $document)
-                        {{$document->id}}|
-                        {{$document->date_from}}|
-                        <a href="{{ asset($document->document) }}" download>{{$document->document}}</a><br>
-                    @endforeach
-                    <a href="/student/add_document/subject_{{$subject->id}}/teacher_{{$teacher->id}}"><button type="button" class="btn btn-outline-dark">Add document</button></a><br>
+                    <table class="table">
+                        <thead>
+                          <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Документ</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($my_documents as $my_document)
+
+                                <tr>
+                                    <th>{{$my_document->id}}</th>
+                                    <td><a href="{{ asset($my_document->document) }}" download>{{$my_document->document}}</a></td>
+                                </tr>
+                            @endforeach
+                    
+                        </tbody>
+                    </table>
+                    
+                    Мұғалімнің документтері:<br>
+                    
+                    <table class="table">
+                        <thead>
+                          <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Орындалу уақыты</th>
+                            <th scope="col">Документ</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($documents as $document)
+                                <tr>
+                                    <th>{{$document->id}}</th>
+                                    <th>{{date_format(date_create($document->date_from), 'd.m.Y')}}</th>
+                                    <td><a href="{{ asset($document->document) }}" download>{{$document->document}}</a></td>
+                                </tr>
+                            @endforeach
+                        
+                            </tbody>
+                        </table>
+                    <a href="/student/add_document/subject_{{$subject->id}}/teacher_{{$teacher->id}}"><button type="button" class="btn btn-outline-dark">Документ қосу</button></a><br>
                 </div>
             </div>
         </div>

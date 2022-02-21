@@ -10,8 +10,8 @@
                 <form method="POST" action="/admin/user/add_to_group/{{$id}}">
                     @csrf
                     <div class="form-group autocomplete">
-                        <label for="group">Мұғалім</label>
-                        <input id="teacher_name" class="form-control" autocomplete="off">
+                        <label for="group">Сынып: </label>
+                        <input id="teacher_name" class="form-control" autocomplete="off" placeholder="1 а [Мұғалімнің аты-жөні]">
                         <input id="teacher_id" name="group_id" style="display: none">
                     </div>
 

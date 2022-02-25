@@ -54,7 +54,7 @@ class AdminUserController extends Controller
             $user->save();
             if($request->role==1)
                 $user->roles()->attach(Role::where('slug','teacher')->first());
-            if($request->role==2)
+            else if($request->role==2)
                 $user->roles()->attach(Role::where('slug','admin')->first());
             else
                 $user->roles()->attach(Role::where('slug','student')->first());
@@ -75,7 +75,7 @@ class AdminUserController extends Controller
 
             if($request->role==1)
                 $user_role->update(array('role_id' => 1));
-            if($request->role==2)
+            else if($request->role==2)
                 $user_role->update(array('role_id' => 2));
             else
                 $user_role->update(array('role_id' => 3));
@@ -91,7 +91,7 @@ class AdminUserController extends Controller
 
     public function delete_user($id)
     {
-        $user = DB::table('users')
+        DB::table('users')
         ->where('users.id',$id)
         ->delete();
         return redirect("/admin/users");

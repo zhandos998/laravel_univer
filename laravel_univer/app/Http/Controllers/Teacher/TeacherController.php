@@ -35,7 +35,7 @@ class TeacherController extends Controller
     }
 
 
-    public function view_group($group_id,$subject_id=0)
+    public function view_group($subject_id=0,$group_id=0)
     {
         $students = DB::table('users')
         ->join('users_groups', 'users.id', '=', 'users_groups.user_id')
@@ -75,7 +75,6 @@ class TeacherController extends Controller
     public function add_document(Request $request,$subject_id,$group_id)
     {
         if ($request->isMethod('post')){
-            // dd($request);
             $statement = DB::select("SHOW TABLE STATUS LIKE 'documents_groups'");
             $nextId = $statement[0]->Auto_increment;
             $fileNameToStore = "/documents_teachers/document_".$nextId.".".$request->document->extension();

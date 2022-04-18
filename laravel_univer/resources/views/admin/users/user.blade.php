@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-10">
             <div class="card">
                 <div class="card-header">{{ Auth::user()->roles[0]->name }}</div>
                 <div class="card-body">
@@ -25,7 +25,7 @@
                             </tr>
                         </tbody>
                     </table>
-                    
+
                     <a href="/admin/change_user/{{$user->id}}"><button type="button" class="btn btn-outline-dark">Қолданушыны өзгерту</button></a>
                     <a href="/admin/delete_user/{{$user->id}}"><button type="button" class="btn btn-outline-dark">Қолданушыны жою</button></a>
                     @if ($add_to_group)

@@ -20,11 +20,11 @@ class RoleSeeder extends Seeder
         $teacher->slug = 'teacher';
         $teacher->save();
         $admin = new Role();
-        $admin->name = 'Админ';
+        $admin->name = 'Администратор';
         $admin->slug = 'admin';
         $admin->save();
         $student = new Role();
-        $student->name = 'Студент';
+        $student->name = 'Оқушы';
         $student->slug = 'student';
         $student->save();
     }

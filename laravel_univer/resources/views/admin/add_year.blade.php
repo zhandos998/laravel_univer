@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-10">
             <div class="card">
                 <div class="card-header">{{ Auth::user()->roles[0]->name }}</div>
 
@@ -14,7 +14,7 @@
                         </div>
                     @endif
 
-                    
+
 
                     <form method="POST" action="/admin/add_year">
                         @csrf

@@ -31,7 +31,10 @@ class TeacherController extends Controller
         $group = DB::table('groups')
         ->where('id_supervisor',Auth::id())
         ->first();
-        return view('teacher.home',['group'=>$group]);
+        $news = DB::table('news')
+        ->orderBy('created_at', 'desc')
+        ->get();
+        return view('teacher.home',['group'=>$group,'news'=>$news]);
     }
 
 
@@ -50,7 +53,10 @@ class TeacherController extends Controller
         ->where("subject_id",$subject_id)
         ->get();
 
-        return view('teacher.view_group',['students'=>$students,'documents'=>$documents,'group_id'=>$group_id,'subject_id'=>$subject_id]);
+        $group = DB::table('groups')
+        ->where('id_supervisor',Auth::id())
+        ->first();
+        return view('teacher.view_group',['students'=>$students,'documents'=>$documents,'group_id'=>$group_id,'subject_id'=>$subject_id,'group'=>$group]);
     }
 
     public function timetable()
@@ -69,7 +75,10 @@ class TeacherController extends Controller
             "Жұма",
             "Сенбі"
         ];
-        return view('teacher.view_timetable',['timetables'=>$timetables,'week_days'=>$week_days]);
+        $group = DB::table('groups')
+        ->where('id_supervisor',Auth::id())
+        ->first();
+        return view('teacher.view_timetable',['timetables'=>$timetables,'week_days'=>$week_days,'group'=>$group]);
     }
 
     public function add_document(Request $request,$subject_id,$group_id)
@@ -82,6 +91,7 @@ class TeacherController extends Controller
             DB::table('documents_groups')
             ->insert([
                 'date_from' => $request->date_from,
+                'title' => $request->title,
                 'document' => 'storage'.$fileNameToStore,
                 'group_id' => $group_id,
                 'subject_id' => $subject_id,
@@ -89,7 +99,10 @@ class TeacherController extends Controller
             ]);
             return redirect("/teacher/view_group/subject_".$subject_id."/group_".$group_id);
         }
-        return view('teacher.add_document',['group_id'=>$group_id,'subject_id'=>$subject_id]);
+        $group = DB::table('groups')
+        ->where('id_supervisor',Auth::id())
+        ->first();
+        return view('teacher.add_document',['group_id'=>$group_id,'subject_id'=>$subject_id,'group'=>$group]);
     }
 
     public function view_student(Request $request,$subject_id,$student_id)
@@ -111,8 +124,9 @@ class TeacherController extends Controller
         $student = DB::table('users')
             ->where("id",$student_id)
             ->first();
-        $subjects = DB::table('subjects')
-            ->get();
+        $subject = DB::table('subjects')
+            ->where('id',$subject_id)
+            ->first();
         $grades = DB::table('grades')
             ->where('subject_id',$subject_id)
             ->where('teacher_id',Auth::id())
@@ -145,22 +159,29 @@ class TeacherController extends Controller
             ->where('student_id',$student_id)
             ->where('year_id',$end_year->id)
             ->first();
-            
+
         $student_documents = DB::table('documents_teachers')
-            ->where("teacher_id",Auth::id())
-            ->where("subject_id",$subject_id)
-            ->where("student_id",$student_id)
+            ->where("documents_teachers.teacher_id",Auth::id())
+            ->where("documents_teachers.subject_id",$subject_id)
+            ->where("documents_teachers.student_id",$student_id)
+            ->join('documents_groups', 'documents_groups.id', '=', 'documents_teachers.document_id')
+            ->select('documents_teachers.id','documents_teachers.document','documents_groups.title')
             ->get();
+
+        $group = DB::table('groups')
+        ->where('id_supervisor',Auth::id())
+        ->first();
         return view('teacher.view_student',[
             'student'=>$student,
             'grades'=>$grades,
-            'subjects'=>$subjects,
+            'subject'=>$subject,
             'subject_id'=>$subject_id,
             'end_quarter'=>$end_quarter,
             'quarter_grades'=>$quarter_grades,
             'end_year'=>$end_year,
             'year_grades'=>$year_grades,
-            'student_documents'=>$student_documents
+            'student_documents'=>$student_documents,
+            'group'=>$group
         ]);
     }
 

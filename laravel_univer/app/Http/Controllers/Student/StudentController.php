@@ -27,9 +27,10 @@ class StudentController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index()
-    {
-
-        return view('student.home');
+    {       $news = DB::table('news')
+        ->orderBy('created_at', 'desc')
+        ->get();
+        return view('student.home',['news'=>$news]);
     }
 
     public function timetable()
@@ -104,12 +105,15 @@ class StudentController extends Controller
             ->join('groups', 'groups.id', '=', 'documents_groups.group_id')
             ->join('users_groups', 'groups.id', '=', 'users_groups.group_id')
             ->where("users_groups.user_id",Auth::id())
+            ->select('documents_groups.id','documents_groups.date_from','documents_groups.document','documents_groups.title')
             ->get();
 
         $my_documents = DB::table('documents_teachers')
-            ->where("teacher_id",$teacher_id)
-            ->where("subject_id",$subject_id)
-            ->where("student_id",Auth::id())
+            ->where("documents_teachers.teacher_id",$teacher_id)
+            ->where("documents_teachers.subject_id",$subject_id)
+            ->where("documents_teachers.student_id",Auth::id())
+            ->join('documents_groups', 'documents_groups.id', '=', 'documents_teachers.document_id')
+            ->select('documents_teachers.id','documents_teachers.document','documents_groups.title')
             ->get();
 
         return view('student.view_lesson',[
@@ -136,10 +140,18 @@ class StudentController extends Controller
                 'document' => 'storage'.$fileNameToStore,
                 'student_id' => Auth::id(),
                 'subject_id' => $subject_id,
+                'document_id' => $request->document_id,
                 'teacher_id' => $teacher_id
             ]);
             return redirect("/student/view_lesson/subject_".$subject_id."/teacher_".$teacher_id);
         }
-        return view('student.add_document',['teacher_id'=>$teacher_id,'subject_id'=>$subject_id]);
+        $documents = DB::table('documents_groups')
+        ->where("teacher_id",$teacher_id)
+        ->where("subject_id",$subject_id)
+        ->join('groups', 'groups.id', '=', 'documents_groups.group_id')
+        ->join('users_groups', 'groups.id', '=', 'users_groups.group_id')
+        ->where("users_groups.user_id",Auth::id())
+        ->get();
+        return view('student.add_document',['teacher_id'=>$teacher_id,'subject_id'=>$subject_id,'documents'=>$documents]);
     }
 }

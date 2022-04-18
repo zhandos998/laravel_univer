@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Quarter;
+use App\Models\Year;
 use Illuminate\Database\Seeder;
 
 class QuarterSeeder extends Seeder
@@ -33,6 +34,11 @@ class QuarterSeeder extends Seeder
         $subject = new Quarter();
         $subject->name = '4 тоқсан';
         $subject->date_to = '2022-04-01';
+        $subject->date_from = '2022-05-25';
+        $subject->save();
+        $subject = new Year();
+        $subject->name = '2022-2023';
+        $subject->date_to = '2022-09-01';
         $subject->date_from = '2022-05-25';
         $subject->save();
     }

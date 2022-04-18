@@ -3,7 +3,9 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-10">
+            <img class="img-fluid rounded w-100 img_style" src="{{ asset('storage/images/teacher_document.jpg') }}" alt="">
+
             <div class="card">
                 <div class="card-header">{{ Auth::user()->roles[0]->name }}</div>
                 <div class="card-body">
@@ -12,6 +14,10 @@
                         <div class="form-group">
                             <label for="date_from">Орындалу уақыты</label>
                             <input type="date" name="date_from" class="form-control" placeholder="Орындалу уақыты">
+                        </div>
+                        <div class="form-group">
+                            <label for="title">Сабақтың тақырыбы</label>
+                            <input name="title" class="form-control" placeholder="Сабақтың тақырыбы">
                         </div>
                         <div class="form-group">
                             <label for="document">Документ</label>

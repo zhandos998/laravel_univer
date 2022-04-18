@@ -3,7 +3,8 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-10">
+            <img class="img-fluid rounded w-100 img_style" src="{{ asset('storage/images/teacher_group.jpg') }}" alt="">
             <div class="card">
                 <div class="card-header">{{ Auth::user()->roles[0]->name }}</div>
 
@@ -25,8 +26,8 @@
                             <td>{{$student->email}}</td>
                         </tr>
                         @endforeach
-                    
-                            
+
+
                         </tbody>
                     </table>
                     @if ($subject_id!=0)
@@ -43,7 +44,7 @@
                                 <tr>
                                     <th>{{$document->id}}</th>
                                     <td>{{date_format(date_create($document->date_from), 'd.m.Y')}}</td>
-                                    <td><a href="{{ asset($document->document) }}" download>{{$document->document}}</a></td>
+                                    <td><a href="{{ asset($document->document) }}" download>{{$document->title}}</a></td>
                                 </tr>
                             @endforeach
                             </tbody>

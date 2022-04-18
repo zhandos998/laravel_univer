@@ -1,0 +1,97 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300&display=swap');
+
+
+:root {
+    --main-bg-color: #1a963f8c;
+    --second-bg-color: #1a963f21;
+}
+
+nav{
+
+    background-color: var(--main-bg-color)!important;
+}
+
+.card-header{
+    background-color: var(--main-bg-color)!important;
+    border-bottom:none;
+}
+
+.card{
+    border:none;
+}
+.btn-outline-dark{
+    border: none;
+}
+
+.btn-outline-dark:hover {
+    background-color: var(--main-bg-color);
+    border-color: var(--main-bg-color);
+    color: black;
+}
+
+.btn-primary{
+    background-color: white;
+    border-color: white;
+    color: black;
+}
+
+.btn-primary:hover{
+
+    background-color: var(--main-bg-color);
+    border-color: var(--main-bg-color);
+    color: black;
+}
+
+.btn{
+    font-size: 1.125rem;
+    min-width: 150px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+.form-group{
+    margin-bottom: 20px;
+}
+
+.form-check{
+    margin-bottom: 10px;
+}
+
+body{
+    font-family: 'Raleway', sans-serif;
+    font-size: 1.125rem;
+    background-color: var(--second-bg-color)!important;
+}
+
+.table thead{
+    background-color: var(--second-bg-color);
+}
+
+.table tbody th[colspan="3"]{
+    background-color: var(--main-bg-color);
+}
+.table tbody{
+    background-color: var(--second-bg-color);
+}
+
+.img_style{
+    object-fit: cover;
+    height: 500px;
+    margin-bottom: 25px;
+}
+/* .table{
+    border-color: transparent;
+} */
+
+/* .table > :not(:first-child) {
+    border-top: none;
+} */
+
+/* .card-header{
+    font-size: 10rem;
+    color: #6c757d!important;
+    text-align: center;
+    padding: 70px 0;
+    font-family: 'Source Sans Pro', sans-serif;
+} */

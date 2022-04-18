@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-10">
             <div class="card">
                 <div class="card-header">{{ Auth::user()->roles[0]->name }}</div>
                 <div class="card-body">
@@ -32,14 +32,14 @@
                         </thead>
                         <tbody>
                     @foreach ($students as $student)
-                    
+
                             <tr>
                                 <th scope="row">{{$student->id}}</th>
                                 <td><a href="/admin/user/{{$student->id}}">{{$student->name}}</a></td>
                                 <td>{{$student->email}}</td>
                                 <td><a href="/admin/remove_from_group/{{$student->id}}"><button type="button" class="btn btn-outline-dark">Сыныптан жою</button></a></td>
                             </tr>
-                        
+
                     @endforeach
                         </tbody>
                     </table>

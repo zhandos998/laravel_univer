@@ -19,6 +19,7 @@ class CreateDocumentsGroupsTable extends Migration
             $table->integer("teacher_id");
             $table->integer("subject_id");
             $table->date("date_from");
+            $table->string("title");
             $table->string("document");
         });
     }

@@ -3,12 +3,12 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-10">
             <div class="card">
                 <div class="card-header">{{ Auth::user()->roles[0]->name }}</div>
                 <div class="card-body">
-                    
-                    <button type="button" class="btn btn-outline-dark"><a href="/admin/add_group">Сынып қосу</a></button>
+
+                    <a href="/admin/add_group"><button type="button" class="btn btn-outline-dark">Сынып қосу</button></a>
                     <table class="table">
                         <thead>
                           <tr>
@@ -27,7 +27,7 @@
                         <td>{{$group->name}}</td>
                         <td><a href="/admin/change_group/{{$group->id}}"><button type="button" class="btn btn-outline-dark">Сыныпты өзгерту</button></a></td>
                         <td><a href="/admin/delete_group/{{$group->id}}"><button type="button" class="btn btn-outline-dark">Сыныпты жою</button></a></td>
-                    </tr>                    
+                    </tr>
                     @endforeach
                     </tbody>
                 </table>

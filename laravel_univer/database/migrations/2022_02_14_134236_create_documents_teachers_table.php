@@ -18,6 +18,7 @@ class CreateDocumentsTeachersTable extends Migration
             $table->integer("student_id");
             $table->integer("teacher_id");
             $table->integer("subject_id");
+            $table->integer("document_id");
             $table->string("document");
             $table->timestamps();
         });

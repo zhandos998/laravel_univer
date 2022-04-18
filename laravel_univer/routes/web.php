@@ -68,6 +68,7 @@ Route::post('/admin/add_year', [App\Http\Controllers\Admin\AdminController::clas
 
 Route::get('/teacher', [App\Http\Controllers\Teacher\TeacherController::class, 'index'])->name('teacher');
 Route::get('/teacher/view_group/subject_{subject_id}/group_{group_id}', [App\Http\Controllers\Teacher\TeacherController::class, 'view_group'])->name('view_group');
+Route::get('/teacher/view_group/{group_id}', [App\Http\Controllers\Teacher\TeacherController::class, 'view_group'])->name('view_group');
 Route::get('/teacher/timetable', [App\Http\Controllers\Teacher\TeacherController::class, 'timetable'])->name('timetable');
 Route::get('/teacher/group/add_document/subject_{subject_id}/group_{group_id}', [App\Http\Controllers\Teacher\TeacherController::class, 'add_document'])->name('add_document');
 Route::post('/teacher/group/add_document/subject_{subject_id}/group_{group_id}', [App\Http\Controllers\Teacher\TeacherController::class, 'add_document'])->name('add_document');

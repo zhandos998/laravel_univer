@@ -18,6 +18,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
 </head>
 <body>
     <style>
@@ -26,10 +27,11 @@
         }
     </style>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <nav class="navbar navbar-expand-md navbar-light shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Мектеп жүйесі') }}
+                    <img style="border-radius: 50%;width: 40px;" src="{{asset('logo.jpeg')}}" alt="{{ config('app.name', 'Мектеп жүйесі') }}">
+                    {{-- {{ config('app.name', 'Мектеп жүйесі') }} --}}
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -38,7 +40,21 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
-
+                        @if (Auth::user() && Auth::user()->roles[0]->id==2)
+                            <li class="nav-item"><a class="nav-link" href="/admin/users">Қолданушылар</a></li>
+                            <li class="nav-item"><a class="nav-link" href="/admin/subjects">Пәндер</a></li>
+                            <li class="nav-item"><a class="nav-link" href="/admin/groups">Сыныптар</a></li>
+                            <li class="nav-item"><a class="nav-link" href="/admin/news">Жаңалықтар</a></li>
+                            <li class="nav-item"><a class="nav-link" href="/admin/add_quarter">Тоқсан қосу</a></li>
+                            <li class="nav-item"><a class="nav-link" href="/admin/add_year">Оқу жылын қосу</a></li>
+                        @elseif (Auth::user() && Auth::user()->roles[0]->id==1)
+                            {{-- @if (!is_null($group))
+                                <li class="nav-item"><a class="nav-link" href="/teacher/view_group/{{$group->id}}">Сыныбымды қарау</a></li>
+                            @endif --}}
+                            <li class="nav-item"><a class="nav-link" href="/teacher/timetable">Сабақ кестесі</a></li>
+                        @elseif (Auth::user() && Auth::user()->roles[0]->id==3)
+                            <li class="nav-item"><a class="nav-link" href="/student/timetable">Сабақ кестесі</a></li>
+                        @endif
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -51,6 +67,11 @@
                                 </li>
                             @endif
                         @else
+                            <li class="nav-item">
+                                <p class="nav-link mb-0">
+                                    {{ Auth::user()->roles[0]->name }}
+                                </p>
+                            </li>
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }}

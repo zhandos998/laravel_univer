@@ -3,12 +3,12 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-10">
             <div class="card">
                 <div class="card-header">{{ Auth::user()->roles[0]->name }}</div>
                 <div class="card-body">
 
-                    <button type="button" class="btn btn-outline-dark"><a href="/admin/add_user">Қолданушыны қосу</a></button>
+                    <a href="/admin/add_user"><button type="button" class="btn btn-outline-dark">Қолданушыны қосу</button></a>
                     <table class="table">
                         <thead>
                           <tr>
@@ -20,7 +20,7 @@
                         </thead>
                         <tbody>
                     @foreach ($users as $user)
-                    
+
                     <tr>
                         <th scope="row">{{$user->id}}</th>
                         <td><a href="/admin/user/{{$user->id}}">{{$user->name}}</a></td>
@@ -29,7 +29,7 @@
                     </tr>
 
                     @endforeach
-                            
+
                         </tbody>
                     </table>
                 </div>
